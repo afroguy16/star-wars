@@ -1,8 +1,12 @@
+import { ThemeProvider } from "styled-components"
+import themes from "./themes";
+import Home from "./views/home";
+
 const App = () => {
   return (
-    <div>
-      <p>Hello Star Wars</p>
-    </div>
+    <ThemeProvider theme={themes['dark']}>
+      <Home />
+    </ThemeProvider>
   );
 }
 
