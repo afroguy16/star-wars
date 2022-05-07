@@ -1,8 +1,12 @@
 import styled from "styled-components";
+import ButtonToggleSwitch from "../../components/button-toggle-switch";
 
 const Layout = styled.div`
   display: flex;
-  min-height: 100vh;
+  flex-direction: row-reverse;
+  align-items: center;
+  padding-right: 20px;
+  min-height: 70px;
   background-color: ${(props) => props.theme.background};
 `;
 
@@ -13,7 +17,7 @@ type Props = {
 const Nav = ({ onToggleSwitch }: Props) => {
   return (
     <Layout>
-      <button onClick={onToggleSwitch}>Click</button>
+      <ButtonToggleSwitch onToggleSwitch={onToggleSwitch} />
     </Layout>
   );
 };

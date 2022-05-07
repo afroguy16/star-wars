@@ -19,9 +19,9 @@ describe("Nav", () => {
   });
 
   it("should call onToggleSwitch callback if toggle clicked", () => {
-    const button = screen.getByRole('button')
+    const checkbox = screen.getByRole('checkbox')
 
-    fireEvent.click(button)
+    fireEvent.click(checkbox)
     
     expect(mockOnToggleSwitch).toHaveBeenCalled();
   });
