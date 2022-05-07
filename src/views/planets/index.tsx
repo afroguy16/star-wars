@@ -2,7 +2,7 @@ import { useState } from "react";
 import Loading from "../../components/loading";
 import { StyledPlanetsWrapper } from "./styles";
 
-const LOADING_TEXT = "Fetching planets";
+const LOADING_TEXT = "Fetching planets 🙂";
 
 const Planets = () => {
   const [loading, setLoading] = useState(true);

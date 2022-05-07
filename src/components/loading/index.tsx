@@ -1,4 +1,4 @@
-import { StyledLoadingWrapper } from "./styles";
+import { StyledLoadingParagraph } from "./styles";
 
 type Props = {
   text: string
@@ -6,14 +6,9 @@ type Props = {
 
 const Loading = ({text}: Props) => {
   return (
-      <StyledLoadingWrapper>
-        <div className="circle">
-          <div className="inner"></div>
-        </div>
-        <div className="text">
-          <p>{text}</p>
-        </div>
-      </StyledLoadingWrapper>
+      <StyledLoadingParagraph>
+        {text}
+      </StyledLoadingParagraph>
   );
 };
 
