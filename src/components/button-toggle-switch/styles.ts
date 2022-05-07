@@ -2,7 +2,7 @@ import styled from "styled-components"
 import sun from "../../assets/icons/sun.svg"
 import moon from "../../assets/icons/moon.svg"
 
-export const Input = styled.input`
+export const StyledInput = styled.input`
   cursor: pointer;
   position: relative;
   width: 60px;

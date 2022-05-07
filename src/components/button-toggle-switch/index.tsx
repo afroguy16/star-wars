@@ -1,4 +1,4 @@
-import { Input } from "./styles";
+import { StyledInput } from "./styles";
 
 type Props = {
   onToggleSwitch: () => void;
@@ -6,7 +6,7 @@ type Props = {
 
 const ButtonToggleSwitch = ({ onToggleSwitch }: Props) => {
   return (
-      <Input type="checkbox" onClick={onToggleSwitch} />
+      <StyledInput type="checkbox" onClick={onToggleSwitch} />
   );
 };
 
