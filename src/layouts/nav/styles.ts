@@ -7,4 +7,5 @@ export const StyledNavWrapper = styled.div`
   padding-right: 20px;
   min-height: 70px;
   background-color: ${(props) => props.theme.background};
+  transition: 0.5s;
 `;

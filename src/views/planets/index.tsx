@@ -1,19 +1,21 @@
-import { useState } from "react";
-import Loading from "../../components/loading";
+import Planet from "../../components/planet";
+import { usePlanets } from "../../hooks/planets";
 import { StyledPlanetsWrapper } from "./styles";
 
-const LOADING_TEXT = "Fetching planets 🙂";
-
 const Planets = () => {
-  const [loading, setLoading] = useState(true);
+  const { fetchPlanets } = usePlanets();
+
+  const getPlanetsElements = () => {
+    return fetchPlanets().map((planet, index) => (
+      <li key={index}>
+        <Planet meta={planet} />
+      </li>
+    ));
+  };
 
   return (
     <StyledPlanetsWrapper>
-      {loading && (
-        <div data-testid="loading" className="loading-wrapper">
-          <Loading text={LOADING_TEXT} />
-        </div>
-      )}
+      <ul>{getPlanetsElements()}</ul>
     </StyledPlanetsWrapper>
   );
 };

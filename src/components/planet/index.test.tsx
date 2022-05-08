@@ -1,13 +1,13 @@
 import { render, cleanup, screen } from "@testing-library/react"
 import Planet from ".";
-import { PlanetT } from "./type";
+import { PlanetT } from "./types";
 
 const FAKE_PLANET: PlanetT = {
   name: 'fake name',
   terrain: ['fakeT1', 'fakeT2', 'fakeT3'],
   climate: ['fakeC1', 'fakeC2'],
-  population: 23232,
-  residents: 938
+  population: '23232',
+  residents: '938'
 }
 
 

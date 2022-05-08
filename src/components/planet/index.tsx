@@ -1,5 +1,5 @@
 import { StyledPlanetWrapper } from "./styles";
-import { PlanetT } from "./type";
+import { PlanetT } from "./types";
 
 type Props = {
   meta: PlanetT;

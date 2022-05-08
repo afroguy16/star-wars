@@ -5,6 +5,7 @@ export const StyledPlanetsWrapper = styled.div`
   min-height: calc(100vh - 70px);
   background-color: ${props => props.theme.background};
   color: ${props => props.theme.text};
+  transition: 0.5s;
 
   .loading-wrapper {
     width: 100%;
