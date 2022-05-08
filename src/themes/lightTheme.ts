@@ -1,7 +1,12 @@
+import { colors } from "./variables"
+
 const LightTheme = {
     background: "#FFF9F6",
-    primary: '#FAAA15',
-    text: '#464545'
+    lightPrimary: '#D16E36',
+    primary: '#D96321',
+    text: colors.gray,
+    itemBackground: '#FFFFFF',
+    borderColor: colors.gray
 }
 
 export default LightTheme

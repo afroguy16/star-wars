@@ -1,13 +1,13 @@
-import { render, cleanup } from "@testing-library/react";
-import Home from ".";
+import { render, cleanup, screen } from "@testing-library/react";
+import Planets from ".";
 
-describe("Home", () => {
+describe("Planets", () => {
   let baseElement: HTMLElement;
 
   afterEach(cleanup);
 
   beforeEach(() => {
-    const utils = render(<Home />);
+    const utils = render(<Planets />);
     baseElement = utils.baseElement;
   });
 

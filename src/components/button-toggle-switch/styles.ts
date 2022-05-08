@@ -17,10 +17,10 @@ export const StyledInput = styled.input`
   }
 
   &:checked {
-    background: #faaa15;
+    background: ${props => props.theme.primary};
     
     &:hover {
-      background: #fab535;
+      background: ${props => props.theme.lightPrimary};
     }
   }
 
