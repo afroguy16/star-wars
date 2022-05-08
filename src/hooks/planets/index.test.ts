@@ -5,7 +5,7 @@ import { results } from "../../mocks/transformed-planets-response"
 
 describe('useTest', () => {
     const { fetchPlanets } = usePlanets();
-    jest.mock('../../data/planets.json', () => mockPlanets);
+    jest.mock('../../data/planets.json', () => mockPlanets); //failed to mock
 
     afterEach(cleanup);
 

@@ -14,9 +14,4 @@ describe("Planets", () => {
   it("should render successfully", () => {
     expect(baseElement).toBeTruthy();
   });
-
-  it("should render Loading planets... on Planets load", () => {
-    const loadingElement = screen.getByTestId('loading')
-    expect(loadingElement).toBeTruthy()
-  });
 });

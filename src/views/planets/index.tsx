@@ -1,6 +1,6 @@
 import Planet from "../../components/planet";
 import { usePlanets } from "../../hooks/planets";
-import { StyledPlanetsWrapper } from "./styles";
+import { StyledPlanets } from "./styles";
 
 const Planets = () => {
   const { fetchPlanets } = usePlanets();
@@ -14,9 +14,9 @@ const Planets = () => {
   };
 
   return (
-    <StyledPlanetsWrapper>
-      <ul>{getPlanetsElements()}</ul>
-    </StyledPlanetsWrapper>
+    <StyledPlanets>
+      {getPlanetsElements()}
+    </StyledPlanets>
   );
 };
 

@@ -18,18 +18,19 @@ const Planet = ({
         <div className="name">
           <p>{name}</p>
         </div>
-        <div className="people">
+        <div className="people-count">
           <div className="population">
-            <p>{population}</p>
-            <p>Population</p>
+            <p className="count">{population}</p>
+            <p className="label">Population</p>
           </div>
           <div className="residents">
-            <p>{residents}</p>
-            <p>Residents</p>
+            <p className="count">{residents}</p>
+            <p className="label">Residents</p>
           </div>
         </div>
       </div>
       <ul className="terrain">{getElements(terrain)}</ul>
+      <div className="decoration"></div>
     </StyledPlanetWrapper>
   );
 };
