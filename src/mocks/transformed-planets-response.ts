@@ -11,14 +11,14 @@ export const results: PlanetT[] = [
   {
     name: "Alderaan",
     climate: ["temperate"],
-    terrain: ["grasslands", " mountains"],
+    terrain: ["grasslands", "mountains"],
     population: "2000000000",
     residents: "3",
   },
   {
     name: "Yavin IV",
-    climate: ["temperate", ", tropical"],
-    terrain: ["jungle", ", rainforests"],
+    climate: ["temperate", "tropical"],
+    terrain: ["jungle", "rainforests"],
     population: "1000",
     residents: "0",
   },
@@ -48,8 +48,8 @@ export const results: PlanetT[] = [
 export const mockedPaginatedItem: PlanetT[] = [
   {
     name: "Yavin IV",
-    climate: ["temperate", ", tropical"],
-    terrain: ["jungle", ", rainforests"],
+    climate: ["temperate", "tropical"],
+    terrain: ["jungle", "rainforests"],
     population: "1000",
     residents: "0",
   },
@@ -59,5 +59,22 @@ export const mockedPaginatedItem: PlanetT[] = [
     terrain: ["tundra", "ice caves", "mountain ranges"],
     population: "unknown",
     residents: "0"
+  },
+];
+
+export const mockedPaginatedItemForPlanetsComponent: PlanetT[] = [
+  {
+    name: "Dagobah",
+    climate: ["murky"],
+    terrain: ["swamp", "jungles"],
+    population: "unknown",
+    residents: "0",
+  },
+  {
+    name: "Bespin",
+    climate: ["temperate"],
+    terrain: ["gas giant"],
+    population: "6000000",
+    residents: "1",
   },
 ];
