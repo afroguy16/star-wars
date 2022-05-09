@@ -27,35 +27,44 @@ describe("PaginationControls with perPage and totalCount greater than zero", () 
     expect(baseElement).toBeTruthy();
   });
 
-  it("should call onSelectpage with page number if a page item is clicked", () => {
+  it("should activate selected listitem and call onSelectpage with page number when a page item is clicked", () => {
     const fakeIndex = 1; //random number chosen, but must be greater than 0 and less than the length of the array
     const selectedListItem = screen.getAllByRole("listitem")[fakeIndex];
 
     fireEvent.click(selectedListItem);
 
     expect(mockOnSelectPage).toHaveBeenCalledWith(fakeIndex + 1);
+    expect(selectedListItem).toHaveClass("active");
   });
 
-  it("should call onSelectpage with the appropriate previous or next page number if the previous or next button is clicked", () => {
+  it("should activate the previous and next page and call onSelectpage with the activated page numbers when the previous or next button is clicked", () => {
     const previousButton = screen.getAllByRole("button")[0];
     const nextButton = screen.getAllByRole("button")[1];
+    const firstPageIndex = 0;
+    const secondPageIndex = 1;
 
     fireEvent.click(nextButton);
     expect(mockOnSelectPage).toHaveBeenCalledWith(2);
 
+    let activeListItem = screen.getAllByRole("listitem")[secondPageIndex];
+    expect(activeListItem).toHaveClass("active");
+
     fireEvent.click(previousButton);
     expect(mockOnSelectPage).toHaveBeenCalledWith(1);
+
+    activeListItem = screen.getAllByRole("listitem")[firstPageIndex];
+    expect(activeListItem).toHaveClass("active");
   });
 
   it("next button should be disabled on the first page and previous button should be disabled on the last page", () => {
     const previousButton = screen.getAllByRole("button")[0];
     const nextButton = screen.getAllByRole("button")[1];
-  
-    expect(previousButton).toHaveAttribute('disabled')
-  
+
+    expect(previousButton).toHaveAttribute("disabled");
+
     fireEvent.click(nextButton);
     fireEvent.click(nextButton);
-    expect(nextButton).toHaveAttribute('disabled')
+    expect(nextButton).toHaveAttribute("disabled");
   });
 });
 
@@ -81,7 +90,7 @@ describe("PaginationControls with perPage and totalCount greater less than zero"
 
     const listItems = screen.queryAllByRole("listitem");
 
-    expect(listItems).toHaveLength(0)
+    expect(listItems).toHaveLength(0);
   });
 
   it("should return no list item if totalCount is zero", () => {
@@ -93,9 +102,9 @@ describe("PaginationControls with perPage and totalCount greater less than zero"
       />
     );
     baseElement = utils.baseElement;
-    
+
     const listItems = screen.queryAllByRole("listitem");
 
-    expect(listItems).toHaveLength(0)
+    expect(listItems).toHaveLength(0);
   });
 });

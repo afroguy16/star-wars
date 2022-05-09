@@ -18,13 +18,17 @@ const PaginationControls = ({ perPage, totalCount, onSelectPage }: Props) => {
     setListCount(totalCount / perPage);
   }, [totalCount, perPage]);
 
-  const isActivePage = (pageNumber: number) => pageNumber === activePage
+  const isActivePage = (pageNumber: number) => pageNumber === activePage;
 
   const getPageCountListElement = () => {
     return [...Array(listCount)].map((_, index) => {
       const pageNumber = index + 1;
       return (
-        <li key={index} onClick={() => handleOnSelectPage(pageNumber)}>
+        <li
+          key={index}
+          className={isActivePage(pageNumber) ? "active" : ""}
+          onClick={() => handleOnSelectPages(pageNumber)}
+        >
           {pageNumber}
         </li>
       );
@@ -33,7 +37,7 @@ const PaginationControls = ({ perPage, totalCount, onSelectPage }: Props) => {
 
   const hasUpToTwoPage = () => listCount > 1;
 
-  const handleOnSelectPage = (pageNumber: number) => {
+  const handleOnSelectPages = (pageNumber: number) => {
     setActivePage(pageNumber);
     onSelectPage(pageNumber);
   };
@@ -44,18 +48,16 @@ const PaginationControls = ({ perPage, totalCount, onSelectPage }: Props) => {
         <StyledPaginationControlsWrapper>
           {hasUpToTwoPage() && (
             <button
-              onClick={() => handleOnSelectPage(activePage - 1)}
+              onClick={() => handleOnSelectPages(activePage - 1)}
               disabled={activePage < 2}
             >
               Previous
             </button>
           )}
-          <ul className="pagination-list-item">
-            {getPageCountListElement()}
-          </ul>
+          <ul className="pagination-list-item">{getPageCountListElement()}</ul>
           {hasUpToTwoPage() && (
             <button
-              onClick={() => handleOnSelectPage(activePage + 1)}
+              onClick={() => handleOnSelectPages(activePage + 1)}
               disabled={activePage === listCount}
             >
               Next
