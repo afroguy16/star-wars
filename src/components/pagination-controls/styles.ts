@@ -1,4 +1,4 @@
 import styled from "styled-components"
 
-export const StyledUnorderedList = styled.ul`
+export const StyledPaginationControlsWrapper = styled.ul`
 `;

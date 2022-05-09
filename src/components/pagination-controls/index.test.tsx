@@ -17,7 +17,7 @@ describe("PaginationControls with perPage and totalCount greater than zero", () 
       <PaginationControls
         perPage={FAKE_PER_PAGE}
         totalCount={results.length}
-        onSelectpage={(e) => mockOnSelectPage(e)}
+        onSelectPage={(e) => mockOnSelectPage(e)}
       />
     );
     baseElement = utils.baseElement;
@@ -27,13 +27,35 @@ describe("PaginationControls with perPage and totalCount greater than zero", () 
     expect(baseElement).toBeTruthy();
   });
 
-  it("should call onSelectpage if a page item is clicked", () => {
+  it("should call onSelectpage with page number if a page item is clicked", () => {
     const fakeIndex = 1; //random number chosen, but must be greater than 0 and less than the length of the array
     const selectedListItem = screen.getAllByRole("listitem")[fakeIndex];
 
     fireEvent.click(selectedListItem);
 
     expect(mockOnSelectPage).toHaveBeenCalledWith(fakeIndex + 1);
+  });
+
+  it("should call onSelectpage with the appropriate previous or next page number if the previous or next button is clicked", () => {
+    const previousButton = screen.getAllByRole("button")[0];
+    const nextButton = screen.getAllByRole("button")[1];
+
+    fireEvent.click(nextButton);
+    expect(mockOnSelectPage).toHaveBeenCalledWith(2);
+
+    fireEvent.click(previousButton);
+    expect(mockOnSelectPage).toHaveBeenCalledWith(1);
+  });
+
+  it("next button should be disabled on the first page and previous button should be disabled on the last page", () => {
+    const previousButton = screen.getAllByRole("button")[0];
+    const nextButton = screen.getAllByRole("button")[1];
+  
+    expect(previousButton).toHaveAttribute('disabled')
+  
+    fireEvent.click(nextButton);
+    fireEvent.click(nextButton);
+    expect(nextButton).toHaveAttribute('disabled')
   });
 });
 
@@ -52,7 +74,7 @@ describe("PaginationControls with perPage and totalCount greater less than zero"
       <PaginationControls
         perPage={0}
         totalCount={results.length}
-        onSelectpage={(e) => mockOnSelectPage(e)}
+        onSelectPage={(e) => mockOnSelectPage(e)}
       />
     );
     baseElement = utils.baseElement;
@@ -67,7 +89,7 @@ describe("PaginationControls with perPage and totalCount greater less than zero"
       <PaginationControls
         perPage={10}
         totalCount={0}
-        onSelectpage={(e) => mockOnSelectPage(e)}
+        onSelectPage={(e) => mockOnSelectPage(e)}
       />
     );
     baseElement = utils.baseElement;
