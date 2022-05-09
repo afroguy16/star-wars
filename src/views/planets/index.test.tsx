@@ -61,7 +61,7 @@ describe("Planets", () => {
     const fiftyFirstItem = data.results[50].name
     const sixtiethItem = data.results[59].name
 
-    const sixthPaginationItem = screen.getByTestId('pagination-wrapper').getElementsByTagName('li')[5]
+    const sixthPaginationItem = screen.getByTestId('pagination-control-wrapper').getElementsByTagName('li')[5]
     fireEvent.click(sixthPaginationItem)
 
     
