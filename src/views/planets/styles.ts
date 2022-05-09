@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { breakPoints } from "../../themes/variables";
 
 export const StyledPlanetsWrapper = styled.div`
+  background-color: ${(props) => props.theme.background};
   .planet-list {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     min-height: calc(100vh - 70px);
-    background-color: ${(props) => props.theme.background};
     color: ${(props) => props.theme.text};
     transition: 0.5s;
     padding: 0;

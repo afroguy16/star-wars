@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 type UsePaginate = {
   paginate: (
     arr: Array<unknown>, //so this can be used for any type of Array
@@ -7,7 +9,7 @@ type UsePaginate = {
 };
 
 function usePaginate(): UsePaginate {
-  const paginate = (
+  const paginate = useCallback((
     arr: Array<unknown>,
     perPage: number,
     currentPage: number
@@ -22,7 +24,7 @@ function usePaginate(): UsePaginate {
     const startIndex = perPage * (currentPage - 1);
     const endIndex = startIndex + perPage;
     return arr.slice(startIndex, endIndex);
-  };
+  }, []);
 
   return { paginate };
 }

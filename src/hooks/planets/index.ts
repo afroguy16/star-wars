@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import planets from "../../data/planets.json";
 import { PaginationConfig, PaginationResult } from "./types";
 import { usePaginate } from "../paginate";
@@ -10,7 +11,7 @@ type UsePlanets = {
 function usePlanets(): UsePlanets {
   const { paginate } = usePaginate();
 
-  const fetchPlanets = (paginationConfig?: PaginationConfig) => {
+  const fetchPlanets = useCallback((paginationConfig?: PaginationConfig): PaginationResult => {
     const transformedPlanets = paginationConfig
       ? (paginate(
         planets.results,
@@ -30,8 +31,8 @@ function usePlanets(): UsePlanets {
       };
     });
 
-    return { results, totalCount: planets.results.length } //planets.results.length could come from the API in real life
-  };
+    return { results, totalCount: planets.results.length }; //planets.results.length could come from the API in real life
+  }, [paginate]);
 
   return { fetchPlanets };
 }
