@@ -1,15 +1,15 @@
+import { ButtonHTMLAttributes } from "react";
 import { StyledButton } from "./styles";
 
 type Props = {
-  text: string
-  disabled?: boolean
-  onClick?: () => void
+  text: string;
 };
 
-const ButtonText = ({ text, disabled, onClick }: Props) => {
-  return (
-      <StyledButton onClick={onClick} disabled={disabled}>{text}</StyledButton>
-  );
+const ButtonText = ({
+  text,
+  ...props
+}: Props & ButtonHTMLAttributes<HTMLButtonElement>) => {
+  return <StyledButton {...props}>{text}</StyledButton>;
 };
 
 export default ButtonText;
