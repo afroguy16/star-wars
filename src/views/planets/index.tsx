@@ -11,12 +11,15 @@ const Planets = () => {
   const { fetchPlanets } = usePlanets();
   const [currentPage, setCurrenPage] = useState(1);
   const [planets, setPlanets] = useState<Array<PlanetT>>([]);
-  const [totalCount, setTotalCount] = useState(0)
+  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
-    const { results, totalCount: count} = fetchPlanets({ perPage: PER_PAGE, currentPage })
-    setPlanets(results)
-    setTotalCount(count)
+    const { results, totalCount: count } = fetchPlanets({
+      perPage: PER_PAGE,
+      currentPage,
+    });
+    setPlanets(results);
+    setTotalCount(count);
   }, [currentPage, fetchPlanets]);
 
   const onSetCurrentPage = (newCurrentPage: number) => {
@@ -34,11 +37,13 @@ const Planets = () => {
   return (
     <StyledPlanetsWrapper>
       <ul className="planet-list">{getPlanetsElements()}</ul>
-      <PaginationControls
-        perPage={PER_PAGE}
-        totalCount={totalCount}
-        onSelectPage={onSetCurrentPage}
-      />
+      <div className="pagionation-wrapper" data-testid="pagination-wrapper">
+        <PaginationControls
+          perPage={PER_PAGE}
+          totalCount={totalCount}
+          onSelectPage={onSetCurrentPage}
+        />
+      </div>
     </StyledPlanetsWrapper>
   );
 };
