@@ -48,7 +48,8 @@ const PaginationControls = ({ perPage, totalCount, onSelectPage }: Props) => {
       {isValidProps && (
         <StyledPaginationControlsWrapper>
           {hasUpToTwoPage() && (
-            <ButtonText text="<"
+            <ButtonText
+              text="<"
               onClick={() => handleOnSelectPages(activePage - 1)}
               disabled={activePage < 2}
             />

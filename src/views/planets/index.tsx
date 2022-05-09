@@ -37,7 +37,7 @@ const Planets = () => {
   return (
     <StyledPlanetsWrapper>
       <ul className="planet-list">{getPlanetsElements()}</ul>
-      <div className="pagionation-wrapper" data-testid="pagination-wrapper">
+      <div className="pagination-wrapper" data-testid="pagination-wrapper">
         <PaginationControls
           perPage={PER_PAGE}
           totalCount={totalCount}

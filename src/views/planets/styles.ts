@@ -3,6 +3,7 @@ import { breakPoints } from "../../themes/variables";
 
 export const StyledPlanetsWrapper = styled.div`
   background-color: ${(props) => props.theme.background};
+  padding-bottom: 64px;
   .planet-list {
     display: flex;
     flex-direction: row;
@@ -13,6 +14,7 @@ export const StyledPlanetsWrapper = styled.div`
     transition: 0.5s;
     padding: 0;
     margin: 0;
+    margin-bottom: 32px;
     list-style-type: none;
     > * {
       width: 400px;

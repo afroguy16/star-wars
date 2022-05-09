@@ -6,7 +6,8 @@ const LightTheme = {
     primary: '#D96321',
     text: colors.gray,
     itemBackground: '#FFFFFF',
-    borderColor: colors.gray
+    borderColor: colors.gray,
+    disabled: '#D3D3D3',
 }
 
 export default LightTheme
