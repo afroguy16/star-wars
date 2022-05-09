@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ButtonText from "../button-text";
 import { StyledPaginationControlsWrapper } from "./styles";
 
 type Props = {
@@ -29,7 +30,7 @@ const PaginationControls = ({ perPage, totalCount, onSelectPage }: Props) => {
           className={isActivePage(pageNumber) ? "active" : ""}
           onClick={() => handleOnSelectPages(pageNumber)}
         >
-          {pageNumber}
+          <ButtonText text={pageNumber.toString()} />
         </li>
       );
     });
@@ -47,21 +48,18 @@ const PaginationControls = ({ perPage, totalCount, onSelectPage }: Props) => {
       {isValidProps && (
         <StyledPaginationControlsWrapper>
           {hasUpToTwoPage() && (
-            <button
+            <ButtonText text="<"
               onClick={() => handleOnSelectPages(activePage - 1)}
               disabled={activePage < 2}
-            >
-              Previous
-            </button>
+            />
           )}
           <ul className="pagination-list-item">{getPageCountListElement()}</ul>
           {hasUpToTwoPage() && (
-            <button
+            <ButtonText
+              text=">"
               onClick={() => handleOnSelectPages(activePage + 1)}
               disabled={activePage === listCount}
-            >
-              Next
-            </button>
+            />
           )}
         </StyledPaginationControlsWrapper>
       )}

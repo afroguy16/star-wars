@@ -34,8 +34,9 @@ describe("Planets", () => {
   it("should renturn a list which contains the eleventh and twentieth when the next button is clicked after page renders and it should should the first and tenth payload name when previous button is clicked again", () => {
     const eleventhItemName = data.results[10].name
     const twentiethItemName = data.results[19].name
-    const previousButton = screen.getAllByRole('button')[0]
-    const nextButton = screen.getAllByRole('button')[1]
+    const paginationButtons = screen.getAllByRole('button')
+    const previousButton = paginationButtons[0]
+    const nextButton = paginationButtons[paginationButtons.length - 1]
 
     fireEvent.click(nextButton)
 

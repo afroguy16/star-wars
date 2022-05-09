@@ -38,8 +38,9 @@ describe("PaginationControls with perPage and totalCount greater than zero", () 
   });
 
   it("should activate the previous and next page and call onSelectpage with the activated page numbers when the previous or next button is clicked", () => {
-    const previousButton = screen.getAllByRole("button")[0];
-    const nextButton = screen.getAllByRole("button")[1];
+    const paginationButtons = screen.getAllByRole('button')
+    const previousButton = paginationButtons[0];
+    const nextButton = paginationButtons[paginationButtons.length - 1];
     const firstPageIndex = 0;
     const secondPageIndex = 1;
 
@@ -57,8 +58,9 @@ describe("PaginationControls with perPage and totalCount greater than zero", () 
   });
 
   it("next button should be disabled on the first page and previous button should be disabled on the last page", () => {
-    const previousButton = screen.getAllByRole("button")[0];
-    const nextButton = screen.getAllByRole("button")[1];
+    const paginationButtons = screen.getAllByRole('button')
+    const previousButton = paginationButtons[0];
+    const nextButton = paginationButtons[paginationButtons.length - 1];
 
     expect(previousButton).toHaveAttribute("disabled");
 
