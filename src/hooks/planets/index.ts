@@ -1,11 +1,10 @@
 import planets from "../../data/planets.json";
-import { PlanetT } from "../../components/planet/types";
-import { PaginationConfig } from "./types";
+import { PaginationConfig, PaginationResult } from "./types";
 import { usePaginate } from "../paginate";
 import { PlanetsData } from "../../data/types";
 
 type UsePlanets = {
-  fetchPlanets: (paginationConfig?: PaginationConfig) => Array<PlanetT>;
+  fetchPlanets: (paginationConfig?: PaginationConfig) => PaginationResult;
 };
 
 function usePlanets(): UsePlanets {
@@ -20,7 +19,7 @@ function usePlanets(): UsePlanets {
       ) as PlanetsData)
       : (planets.results as PlanetsData);
 
-    return transformedPlanets.map((planet) => {
+    const results = transformedPlanets.map((planet) => {
       const { name, climate, terrain, population, residents } = planet;
       return {
         name,
@@ -30,6 +29,8 @@ function usePlanets(): UsePlanets {
         residents: residents?.length.toString(),
       };
     });
+
+    return { results, totalCount: planets.results.length } //planets.results.length could come from the API in real life
   };
 
   return { fetchPlanets };
