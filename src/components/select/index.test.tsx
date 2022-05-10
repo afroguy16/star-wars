@@ -4,7 +4,8 @@ import Select from ".";
 
 const FAKE_OPTIONS = ["option1", "option2", "option3"];
 const FAKE_NAME = "fakeName";
-const FAKE_DEFAULT = "All"
+const FAKE_DEFAULT = "All";
+const FAKE_LABEL = "Select an option";
 
 describe("Select", () => {
   let mockOnClick: jest.Mock<any, any>;
@@ -48,9 +49,14 @@ describe("Select", () => {
 
     expect(mockOnClick).toHaveBeenCalledWith(FAKE_OPTIONS[0]);
   });
+
+  it("should not show a label", () => {
+    const labelElement = screen.queryByRole("label");
+    expect(labelElement).toBeFalsy();
+  });
 });
 
-describe("Select with default value", () => {
+describe("Select with default value and label", () => {
   let baseElement: HTMLElement;
   let mockOnClick: jest.Mock<any, any>;
 
@@ -62,6 +68,7 @@ describe("Select with default value", () => {
     const utils = render(
       <Select
         defaultOption={FAKE_DEFAULT}
+        label={FAKE_LABEL}
         options={FAKE_OPTIONS}
         name={FAKE_NAME}
         onChange={(e) => mockOnClick(e)}
@@ -75,7 +82,12 @@ describe("Select with default value", () => {
     const firstOptionElement = optionElements[0];
 
     expect(optionElements).toHaveLength(FAKE_OPTIONS.length + 1);
-    expect(firstOptionElement).toHaveAttribute('value', '')
-    expect(firstOptionElement.innerHTML).toBe(FAKE_DEFAULT)
+    expect(firstOptionElement).toHaveAttribute("value", "");
+    expect(firstOptionElement.innerHTML).toBe(FAKE_DEFAULT);
   });
-})
+
+  it("should show a label", () => {
+    const labelElement = screen.getByRole("label");
+    expect(labelElement.innerHTML).toBe(FAKE_LABEL);
+  });
+});
