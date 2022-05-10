@@ -38,7 +38,7 @@ const Select = ({
 
   return (
     <StyledSelectWrapper>
-      <div>{label && <p role="label">{label}</p>}</div>
+      {label && <div><p>{label}</p></div>}
 
       {searchable && (
         <div>

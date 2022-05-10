@@ -52,8 +52,8 @@ describe("Select", () => {
   });
 
   it("should not show a label", () => {
-    const labelElement = screen.queryByRole("label");
-    expect(labelElement).toBeFalsy();
+    const labelElement = screen.queryByText(FAKE_LABEL);
+    expect(labelElement).not.toBeInTheDocument();
   });
 
   it("should not show a search box", () => {
@@ -91,8 +91,8 @@ describe("Select with default value and label", () => {
   });
 
   it("should show a label", () => {
-    const labelElement = screen.getByRole("label");
-    expect(labelElement.innerHTML).toBe(FAKE_LABEL);
+    const labelElement = screen.getByText(FAKE_LABEL);
+    expect(labelElement).toBeInTheDocument();
   });
 });
 
