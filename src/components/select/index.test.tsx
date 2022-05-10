@@ -1,8 +1,9 @@
-import { render, cleanup, screen } from "@testing-library/react";
+import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { act } from "react-dom/test-utils";
 import Select from ".";
 
-const FAKE_OPTIONS = ["option1", "option2", "option3"];
+const FAKE_OPTIONS = ["Unique option", "Something else", "Another option"];
 const FAKE_NAME = "fakeName";
 const FAKE_DEFAULT = "All";
 const FAKE_LABEL = "Select an option";
@@ -54,10 +55,14 @@ describe("Select", () => {
     const labelElement = screen.queryByRole("label");
     expect(labelElement).toBeFalsy();
   });
+
+  it("should not show a search box", () => {
+    const searchbox = screen.queryByRole("textbox");
+    expect(searchbox).toBeFalsy();
+  });
 });
 
 describe("Select with default value and label", () => {
-  let baseElement: HTMLElement;
   let mockOnClick: jest.Mock<any, any>;
 
   afterEach(cleanup);
@@ -65,7 +70,7 @@ describe("Select with default value and label", () => {
   beforeEach(() => {
     mockOnClick = jest.fn();
 
-    const utils = render(
+    render(
       <Select
         defaultOption={FAKE_DEFAULT}
         label={FAKE_LABEL}
@@ -74,7 +79,6 @@ describe("Select with default value and label", () => {
         onChange={(e) => mockOnClick(e)}
       />
     );
-    baseElement = utils.baseElement;
   });
 
   it("should call render a default option with no value", () => {
@@ -89,5 +93,51 @@ describe("Select with default value and label", () => {
   it("should show a label", () => {
     const labelElement = screen.getByRole("label");
     expect(labelElement.innerHTML).toBe(FAKE_LABEL);
+  });
+});
+
+describe("Searchable Select", () => {
+  let mockOnClick: jest.Mock<any, any>;
+
+  afterEach(cleanup);
+
+  beforeEach(() => {
+    mockOnClick = jest.fn();
+
+    render(
+      <Select
+        label={FAKE_LABEL}
+        options={FAKE_OPTIONS}
+        name={FAKE_NAME}
+        onChange={(e) => mockOnClick(e)}
+        searchable
+      />
+    );
+  });
+
+  it("should contain a search box and a filterable list based on the query entered in the searchbox", () => {
+    const searchBox = screen.getByRole("textbox");
+
+    userEvent.type(searchBox, 'op')
+
+    let optionElements = screen.getAllByRole("option");
+    let firstOptionElement = optionElements[0];
+    let secondOptionElement = optionElements[1];
+
+    expect(optionElements).toHaveLength(2);
+    expect(firstOptionElement).toHaveAttribute("value", FAKE_OPTIONS[0]);
+    expect(secondOptionElement).toHaveAttribute("value", FAKE_OPTIONS[2]);
+
+    fireEvent.change(searchBox, {target: {value: ''}})
+
+    optionElements = screen.getAllByRole("option");
+    firstOptionElement = optionElements[0];
+    secondOptionElement = optionElements[1];
+    const thirdOptionElement = optionElements[2];
+
+    expect(optionElements).toHaveLength(FAKE_OPTIONS.length);
+    expect(firstOptionElement).toHaveAttribute("value", FAKE_OPTIONS[0]);
+    expect(secondOptionElement).toHaveAttribute("value", FAKE_OPTIONS[1]);
+    expect(thirdOptionElement).toHaveAttribute("value", FAKE_OPTIONS[2]);
   });
 });
