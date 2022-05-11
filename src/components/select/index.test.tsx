@@ -1,9 +1,9 @@
 import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { act } from "react-dom/test-utils";
 import Select from ".";
 
-const FAKE_OPTIONS = ["Unique option", "Something else", "Another option"];
+const FAKE_OPTIONS = new Set(["Unique option", "Something else", "Another option"]);
+const FAKE_OPTIONS_ARRARY = [...FAKE_OPTIONS]
 const FAKE_NAME = "fakeName";
 const FAKE_DEFAULT = "All";
 const FAKE_LABEL = "Select an option";
@@ -37,18 +37,18 @@ describe("Select", () => {
     const secondOptionElement = optionElements[1];
     const thirdOptionElement = optionElements[2];
 
-    expect(optionElements).toHaveLength(FAKE_OPTIONS.length);
-    expect(firstOptionElement).toHaveAttribute("value", FAKE_OPTIONS[0]);
-    expect(secondOptionElement).toHaveAttribute("value", FAKE_OPTIONS[1]);
-    expect(thirdOptionElement).toHaveAttribute("value", FAKE_OPTIONS[2]);
+    expect(optionElements).toHaveLength(FAKE_OPTIONS.size);
+    expect(firstOptionElement).toHaveAttribute("value", FAKE_OPTIONS_ARRARY[0]);
+    expect(secondOptionElement).toHaveAttribute("value", FAKE_OPTIONS_ARRARY[1]);
+    expect(thirdOptionElement).toHaveAttribute("value", FAKE_OPTIONS_ARRARY[2]);
   });
 
   it("should call onChange callback with the selected option value if a an option is selected", () => {
     const selectElement = screen.getByRole("combobox");
 
-    userEvent.selectOptions(selectElement, FAKE_OPTIONS[0]);
+    userEvent.selectOptions(selectElement, FAKE_OPTIONS_ARRARY[0]);
 
-    expect(mockOnClick).toHaveBeenCalledWith(FAKE_OPTIONS[0]);
+    expect(mockOnClick).toHaveBeenCalledWith(FAKE_OPTIONS_ARRARY[0]);
   });
 
   it("should not show a label", () => {
@@ -85,7 +85,7 @@ describe("Select with default value and label", () => {
     const optionElements = screen.getAllByRole("option");
     const firstOptionElement = optionElements[0];
 
-    expect(optionElements).toHaveLength(FAKE_OPTIONS.length + 1);
+    expect(optionElements).toHaveLength(FAKE_OPTIONS_ARRARY.length + 1);
     expect(firstOptionElement).toHaveAttribute("value", "");
     expect(firstOptionElement.innerHTML).toBe(FAKE_DEFAULT);
   });
@@ -125,8 +125,8 @@ describe("Searchable Select", () => {
     let secondOptionElement = optionElements[1];
 
     expect(optionElements).toHaveLength(2);
-    expect(firstOptionElement).toHaveAttribute("value", FAKE_OPTIONS[0]);
-    expect(secondOptionElement).toHaveAttribute("value", FAKE_OPTIONS[2]);
+    expect(firstOptionElement).toHaveAttribute("value", FAKE_OPTIONS_ARRARY[0]);
+    expect(secondOptionElement).toHaveAttribute("value", FAKE_OPTIONS_ARRARY[2]);
 
     fireEvent.change(searchBox, {target: {value: ''}})
 
@@ -135,9 +135,9 @@ describe("Searchable Select", () => {
     secondOptionElement = optionElements[1];
     const thirdOptionElement = optionElements[2];
 
-    expect(optionElements).toHaveLength(FAKE_OPTIONS.length);
-    expect(firstOptionElement).toHaveAttribute("value", FAKE_OPTIONS[0]);
-    expect(secondOptionElement).toHaveAttribute("value", FAKE_OPTIONS[1]);
-    expect(thirdOptionElement).toHaveAttribute("value", FAKE_OPTIONS[2]);
+    expect(optionElements).toHaveLength(FAKE_OPTIONS_ARRARY.length);
+    expect(firstOptionElement).toHaveAttribute("value", FAKE_OPTIONS_ARRARY[0]);
+    expect(secondOptionElement).toHaveAttribute("value", FAKE_OPTIONS_ARRARY[1]);
+    expect(thirdOptionElement).toHaveAttribute("value", FAKE_OPTIONS_ARRARY[2]);
   });
 });

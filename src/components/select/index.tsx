@@ -4,7 +4,7 @@ import { StyledSelectWrapper } from "./styles";
 type Props = {
   defaultOption?: string;
   label?: string;
-  options: Array<string>;
+  options: Set<string>;
   searchable?: boolean;
   onChange: (selectionOption: string) => void;
 };
@@ -31,14 +31,16 @@ const Select = ({
   };
 
   const onFilterOptions = (query: string) => {
-    const filtered = options.filter((option) => option.includes(query));
-    if (!filtered) return options;
-    setFilteredOptions(filtered);
+    if(query === '') {
+      setFilteredOptions([...options])
+    }
+    const filtered = [...options].filter((option) => option.includes(query));
+    setFilteredOptions([...filtered]);
   };
 
   return (
     <StyledSelectWrapper>
-      {label && <div><p>{label}</p></div>}
+      {!!label && <div><p>{label}</p></div>}
 
       {searchable && (
         <div>
