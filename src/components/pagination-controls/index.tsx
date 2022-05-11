@@ -14,8 +14,11 @@ const PaginationControls = ({ perPage, totalCount, onSelectPage }: Props) => {
   const [activePage, setActivePage] = useState(1);
 
   useEffect(() => {
-    if (totalCount < 1 || perPage < 1) return;
-    setIsValidProps((previousValue) => !previousValue);
+    if (totalCount < 1 || perPage < 1) {
+      setIsValidProps(false)
+      return
+    }
+    setIsValidProps(true)
     setListCount(totalCount / perPage);
   }, [totalCount, perPage]);
 
