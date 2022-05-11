@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import SelectMulti from ".";
 
 const FAKE_OPTIONS = new Set(['option 1', 'option 2', 'option 3'])
+const FAKE_OPTIONS_ARRAY = [...FAKE_OPTIONS]
 const FAKE_LABEL = "Select an option"
 
 describe("SelectMulti with no label", () => {
@@ -23,29 +24,26 @@ describe("SelectMulti with no label", () => {
     const thirdOptionElement = optionElements[2]
     
     expect(optionElements).toHaveLength(FAKE_OPTIONS.size)
-    expect(firstOptionElement).toHaveAttribute('name', [...FAKE_OPTIONS][0])
-    expect(secondOptionElement).toHaveAttribute('name', [...FAKE_OPTIONS][1])
-    expect(thirdOptionElement).toHaveAttribute('name', [...FAKE_OPTIONS][2])
+    expect(firstOptionElement).toHaveAttribute('name', FAKE_OPTIONS_ARRAY[0])
+    expect(secondOptionElement).toHaveAttribute('name', FAKE_OPTIONS_ARRAY[1])
+    expect(thirdOptionElement).toHaveAttribute('name', FAKE_OPTIONS_ARRAY[2])
   });
 
   it("should call onValueCange callback with the current a snapshot of the current state of the options selected", () => {
     const optionElements = screen.getAllByRole('checkbox')
     const firstOptionElement = optionElements[0]
     const secondOptionElement = optionElements[1]
-    const fakeOptions = [...FAKE_OPTIONS] //convert set to array so it's index can be used easily
-
-    const selectedValue = new Set([fakeOptions[0]])
+    const firstOptionSelected = [FAKE_OPTIONS_ARRAY[0]]
+    const firstAndSecondOptionsSelected = [...firstOptionSelected, FAKE_OPTIONS_ARRAY[1]]
 
     userEvent.click(firstOptionElement) //select first item
-    expect(mockOnValueChange).toHaveBeenLastCalledWith(selectedValue)
+    expect(mockOnValueChange).toHaveBeenLastCalledWith(firstOptionSelected)
 
     userEvent.click(secondOptionElement)  //select second item
-    selectedValue.add(fakeOptions[1])
-    expect(mockOnValueChange).toHaveBeenCalledWith(selectedValue)
+    expect(mockOnValueChange).toHaveBeenLastCalledWith(firstAndSecondOptionsSelected)
 
     userEvent.click(secondOptionElement) //deselect second item
-    selectedValue.delete(fakeOptions[1])
-    expect(mockOnValueChange).toHaveBeenLastCalledWith(selectedValue)
+    expect(mockOnValueChange).toHaveBeenLastCalledWith(firstOptionSelected)
   });
 
   it(`should render items selected helper message based on the number of items selected`, () => {

@@ -4,33 +4,34 @@ import { StyledSelectMultiWrapper } from "./styles";
 type Props = {
   options: Set<string>;
   label?: string;
-  onValueChange: (updatedState: Set<string>) => void;
+  onValueChange: (updatedState: Array<string>) => void;
 };
 
 const SelectMulti = ({ options, label, onValueChange }: Props) => {
-  const [selectedOptions, setSelectedOptions] = useState<Set<string>>(
-    new Set()
-  );
+  const [selectedOptions, setSelectedOptions] = useState<Array<string>>([]);
 
   const handleOnChange = (value: string) => {
-    const updatedSelectedOptions = new Set(selectedOptions);
-    const hasValue = updatedSelectedOptions.has(value);
-    if (hasValue) {
-      updatedSelectedOptions.delete(value);
+    let updatedSelectedOptions = [...selectedOptions];
+    const valueIndex = updatedSelectedOptions.findIndex(options => options === value);
+    
+    if (valueIndex >= 0) {
+      updatedSelectedOptions.splice(valueIndex, 1);
     } else {
-      updatedSelectedOptions.add(value);
+      updatedSelectedOptions.push(value);
     }
+
     setSelectedOptions(updatedSelectedOptions);
     onValueChange(updatedSelectedOptions);
   };
 
   const getSelectedOptionsCountElement = () => {
-    const count = selectedOptions.size;
-    if (count < 1) return <p aria-label="selected count">0 item selected</p>;
-    if (count > 1)
-      return <p aria-label="selected count">{count} items selected</p>;
-    return <p aria-label="selected count">1 item selected</p>;
-  };
+    const count = selectedOptions.length
+    
+    if (count < 1) return <p aria-label="selected count">0 item selected</p>
+    if (count > 1) return <p aria-label="selected count">{count} items selected</p>
+    
+    return <p aria-label="selected count">1 item selected</p>
+  }
 
   const getInputElements = () =>
     [...options].map((option, index) => (
