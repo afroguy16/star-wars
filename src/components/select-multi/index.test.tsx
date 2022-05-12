@@ -1,8 +1,8 @@
-import { render, cleanup, screen } from "@testing-library/react";
+import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import SelectMulti from ".";
 
-const FAKE_OPTIONS = new Set(['option 1', 'option 2', 'option 3'])
+const FAKE_OPTIONS = new Set(['option 1', 'random', 'option 3'])
 const FAKE_OPTIONS_ARRAY = [...FAKE_OPTIONS]
 const FAKE_LABEL = "Select an option"
 
@@ -72,9 +72,14 @@ describe("SelectMulti with no label", () => {
     const labelElement = screen.queryByText(FAKE_LABEL);
     expect(labelElement).not.toBeInTheDocument();
   });
+
+  it("should not show a search box", () => {
+    const searchbox = screen.queryByRole("textbox");
+    expect(searchbox).toBeFalsy();
+  });
 });
 
-describe("SelectMulti with Label", () => {
+describe("Searchable SelectMulti with Label", () => {
   let mockOnValueChange: jest.Mock<any, any>;
 
   afterEach(cleanup);
@@ -82,11 +87,37 @@ describe("SelectMulti with Label", () => {
   beforeEach(() => {
     mockOnValueChange = jest.fn()
 
-    render(<SelectMulti onValueChange={(e) => mockOnValueChange(e)} options={FAKE_OPTIONS} label={FAKE_LABEL} />)
+    render(<SelectMulti onValueChange={(e) => mockOnValueChange(e)} options={FAKE_OPTIONS} label={FAKE_LABEL} searchable />)
   })
 
   it("should show a label", () => {
     const labelElement = screen.getByText(FAKE_LABEL);
     expect(labelElement).toBeInTheDocument();
+  });
+
+  it("should contain a search box and a filterable list based on the query entered in the searchbox", () => {
+    const searchBox = screen.getByRole("textbox");
+
+    userEvent.type(searchBox, 'op')
+
+    let optionElements = screen.getAllByRole("checkbox");
+    let firstOptionElement = optionElements[0];
+    let secondOptionElement = optionElements[1];
+
+    expect(optionElements).toHaveLength(2);
+    expect(firstOptionElement).toHaveAttribute("name", FAKE_OPTIONS_ARRAY[0]);
+    expect(secondOptionElement).toHaveAttribute("name", FAKE_OPTIONS_ARRAY[2]);
+
+    fireEvent.change(searchBox, {target: {value: ''}})
+
+    optionElements = screen.getAllByRole("checkbox");
+    firstOptionElement = optionElements[0];
+    secondOptionElement = optionElements[1];
+    const thirdOptionElement = optionElements[2];
+
+    expect(optionElements).toHaveLength(FAKE_OPTIONS_ARRAY.length);
+    expect(firstOptionElement).toHaveAttribute("name", FAKE_OPTIONS_ARRAY[0]);
+    expect(secondOptionElement).toHaveAttribute("name", FAKE_OPTIONS_ARRAY[1]);
+    expect(thirdOptionElement).toHaveAttribute("name", FAKE_OPTIONS_ARRAY[2]);
   });
 })

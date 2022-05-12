@@ -4,11 +4,22 @@ import { StyledSelectMultiWrapper } from "./styles";
 type Props = {
   options: Set<string>;
   label?: string;
+  searchable?: boolean;
   onValueChange: (updatedState: Array<string>) => void;
 };
 
-const SelectMulti = ({ options, label, onValueChange }: Props) => {
-  const [selectedOptions, setSelectedOptions] = useState<Array<string>>([]);
+const SelectMulti = ({ options, label, searchable, onValueChange }: Props) => {
+  const [selectedOptions, setSelectedOptions] = useState<Array<string>>([])
+  const [filteredOptions, setFilteredOptions] = useState([...options])
+
+  // This could be made a hook to avoid repeatition
+  const onFilterOptions = (query: string) => {
+    if(query === '') {
+      setFilteredOptions([...options])
+    }
+    const filtered = [...options].filter((option) => option.includes(query));
+    setFilteredOptions([...filtered]);
+  };
 
   const handleOnChange = (value: string) => {
     let updatedSelectedOptions = [...selectedOptions];
@@ -34,7 +45,7 @@ const SelectMulti = ({ options, label, onValueChange }: Props) => {
   }
 
   const getInputElements = () =>
-    [...options].map((option, index) => (
+    filteredOptions.map((option, index) => (
       <input
         key={index}
         type="checkbox"
@@ -48,6 +59,14 @@ const SelectMulti = ({ options, label, onValueChange }: Props) => {
       {!!label && (
         <div>
           <p>{label}</p>
+        </div>
+      )}
+      {searchable && (
+        <div>
+          <input
+            type="text"
+            onChange={(e) => onFilterOptions(e.target.value)}
+          />
         </div>
       )}
       <div>{getSelectedOptionsCountElement()}</div>
