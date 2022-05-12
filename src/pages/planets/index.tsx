@@ -1,33 +1,29 @@
 import { useEffect, useState } from "react";
 import PaginationControls from "../../components/pagination-controls";
 import Planet from "../../components/planet";
-import { PlanetT } from "../../components/planet/types";
 import { usePlanets } from "../../hooks/planets";
+import FilterSort from "../../layouts/filter-sort";
+import usePlanetsContext from "../../store/PlanetsContext";
 import { StyledPlanetsWrapper } from "./styles";
 
 const PER_PAGE = 10;
 
 const Planets = () => {
   const { fetchPlanets } = usePlanets();
+  const { savePlanets, filteredPlanets } = usePlanetsContext();
   const [currentPage, setCurrenPage] = useState(1);
-  const [planets, setPlanets] = useState<Array<PlanetT>>([]);
-  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
-    const { results, totalCount: count } = fetchPlanets({
-      perPage: PER_PAGE,
-      currentPage,
-    });
-    setPlanets(results);
-    setTotalCount(count);
-  }, [currentPage, fetchPlanets]);
+    const planets = fetchPlanets();
+    savePlanets(planets);
+  }, [fetchPlanets, savePlanets]);
 
   const onSetCurrentPage = (newCurrentPage: number) => {
     setCurrenPage(newCurrentPage);
   };
 
   const getPlanetsElements = () => {
-    return planets.map((planet, index) => (
+    return filteredPlanets.map((planet, index) => (
       <li key={index}>
         <Planet meta={planet} />
       </li>
@@ -36,11 +32,12 @@ const Planets = () => {
 
   return (
     <StyledPlanetsWrapper>
+      <FilterSort />
       <ul className="planet-list">{getPlanetsElements()}</ul>
       <div data-testid="pagination-control-wrapper">
         <PaginationControls
           perPage={PER_PAGE}
-          totalCount={totalCount}
+          totalCount={filteredPlanets.length}
           onSelectPage={onSetCurrentPage}
         />
       </div>

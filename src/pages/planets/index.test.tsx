@@ -1,6 +1,9 @@
 import { render, cleanup, screen, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Planets from ".";
 import data from "../../data/planets.json";
+import { results as mockResults, sortedResultsByName } from "../../mocks/transformed-planets-response";
+import { PlanetsProvider } from "../../store/PlanetsContext";
 
 describe("Planets", () => {
   let baseElement: HTMLElement;
@@ -8,7 +11,7 @@ describe("Planets", () => {
   afterEach(cleanup);
 
   beforeEach(() => {
-    const utils = render(<Planets />);
+    const utils = render(<PlanetsProvider><Planets /></PlanetsProvider>);
     baseElement = utils.baseElement;
   });
 
@@ -72,3 +75,28 @@ describe("Planets", () => {
     expect(sixtiethItemElement).toBeInTheDocument()
   });
 });
+
+describe("Planets", () => {
+  let baseElement: HTMLElement;
+
+  afterEach(cleanup);
+
+  beforeEach(() => {
+    jest.mock("../../data/planets.json", () => mockResults)
+  })
+
+  beforeEach(() => {
+    const utils = render(<PlanetsProvider><Planets /></PlanetsProvider>);
+    baseElement = utils.baseElement;
+  })
+
+  it("should return a list sorted by name if it is sorted by name", () => {
+    const sortElement = screen.getByTestId('sort')
+    const sortByNameElement = sortElement.getElementsByTagName('option')[0] //test is reliant on the position in the dom
+    userEvent.click(sortByNameElement)
+    
+    const planetElements = screen.getAllByLabelText('planet')
+    const firstPlanetElement = planetElements[0]
+    expect(firstPlanetElement.innerHTML).toContain(sortedResultsByName[0].name)
+  });
+})

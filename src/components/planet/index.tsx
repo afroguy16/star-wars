@@ -12,7 +12,7 @@ const Planet = ({
     arr.map((item, index) => <li key={index}>{item}</li>);
 
   return (
-    <StyledPlanetWrapper>
+    <StyledPlanetWrapper aria-label="planet">
       <ul className="climate">{getElements(climate)}</ul>
       <div className="main">
         <div className="name">

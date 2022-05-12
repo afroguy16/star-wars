@@ -3,7 +3,8 @@ import { ThemeProvider } from "styled-components";
 import Nav from "./layouts/nav";
 import themes from "./themes";
 import { ThemesE } from "./themes/enums";
-import Planets from "./views/planets";
+import Planets from "./pages/planets";
+import { PlanetsProvider } from "./store/PlanetsContext";
 
 const App = () => {
   const [activeTheme, setActiveTheme] = useState<ThemesE>(ThemesE.LIGHT);
@@ -16,7 +17,9 @@ const App = () => {
   return (
     <ThemeProvider theme={themes[activeTheme]}>
       <Nav onToggleSwitch={onToggleTheme} />
-      <Planets />
+      <PlanetsProvider>
+        <Planets />
+      </PlanetsProvider>
     </ThemeProvider>
   );
 };
