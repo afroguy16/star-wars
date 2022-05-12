@@ -19,6 +19,15 @@ const Select = ({
 }: Props & SelectHTMLAttributes<HTMLSelectElement>) => {
   const [filteredOptions, setFilteredOptions] = useState([...options]);
 
+  // This could be made a hook to avoid repeatition
+  const onFilterOptions = (query: string) => {
+    if(query === '') {
+      setFilteredOptions([...options])
+    }
+    const filtered = [...options].filter((option) => option.includes(query));
+    setFilteredOptions([...filtered]);
+  };
+  
   const getOptionsElements = () =>
     filteredOptions.map((option, index) => (
       <option key={index} value={option}>
@@ -28,14 +37,6 @@ const Select = ({
 
   const onChangeHandler = (value: string) => {
     onChange(value);
-  };
-
-  const onFilterOptions = (query: string) => {
-    if(query === '') {
-      setFilteredOptions([...options])
-    }
-    const filtered = [...options].filter((option) => option.includes(query));
-    setFilteredOptions([...filtered]);
   };
 
   return (
