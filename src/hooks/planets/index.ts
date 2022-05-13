@@ -14,8 +14,8 @@ function usePlanets(): UsePlanets {
         name,
         climate: climate.split(",").map((item) => item.trim()),
         terrain: terrain.split(",").map((item) => item.trim()),
-        population,
-        residents: residents?.length.toString(),
+        population: +population >= 0 ? +population : -1,
+        residents: residents?.length,
       };
     });
 

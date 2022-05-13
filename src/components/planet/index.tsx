@@ -20,11 +20,13 @@ const Planet = ({
         </div>
         <div className="people-count">
           <div className="population">
-            <p className="count">{population}</p>
+            <p className="count">
+              {population >= 0 ? population.toLocaleString() : "unknown"}
+            </p>
             <p className="label">Population</p>
           </div>
           <div className="residents">
-            <p className="count">{residents}</p>
+            <p className="count">{residents.toLocaleString()}</p>
             <p className="label">Residents</p>
           </div>
         </div>
