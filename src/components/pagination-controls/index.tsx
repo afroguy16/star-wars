@@ -2,23 +2,39 @@ import { useEffect, useState } from "react";
 import ButtonText from "../button-text";
 import { StyledPaginationControlsWrapper } from "./styles";
 
+const DEFAULT_ACTIVE_PAGE = 1;
+
 type Props = {
+  parentControlledActivePage?: number;
   perPage: number;
   totalCount: number;
   onSelectPage: (pageNumber: number) => void;
 };
 
-const PaginationControls = ({ perPage, totalCount, onSelectPage }: Props) => {
+const PaginationControls = ({
+  parentControlledActivePage,
+  perPage,
+  totalCount,
+  onSelectPage,
+}: Props) => {
   const [isValidProps, setIsValidProps] = useState(false);
   const [listCount, setListCount] = useState(totalCount / perPage);
-  const [activePage, setActivePage] = useState(1);
+  const [activePage, setActivePage] = useState(
+    parentControlledActivePage
+      ? parentControlledActivePage
+      : DEFAULT_ACTIVE_PAGE
+  );
+
+  useEffect(() => {
+    parentControlledActivePage && setActivePage(parentControlledActivePage);
+  }, [parentControlledActivePage]);
 
   useEffect(() => {
     if (totalCount < 1 || perPage < 1) {
-      setIsValidProps(false)
-      return
+      setIsValidProps(false);
+      return;
     }
-    setIsValidProps(true)
+    setIsValidProps(true);
     setListCount(totalCount / perPage);
   }, [totalCount, perPage]);
 

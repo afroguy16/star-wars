@@ -9,19 +9,24 @@ import { StyledFilterSortWrapper } from "./styles";
 // but that would be too much work for the parent.
 // Since the components of this sort-filter is already doing the dumb work, I can make this smart to labour is distributed
 
+type Props = {
+  onTriggered: () => void;
+};
+
 const OPTIONS: Set<SortPlanetsByE> = new Set([
   SortPlanetsByE.NAME,
   SortPlanetsByE.POPULATION,
   SortPlanetsByE.RESIDENTS,
 ]);
 
-const FilterSort = () => {
+const FilterSort = ({onTriggered}: Props) => {
   const [, setActiveSort] = useState<SortPlanetsByE>();
-  const { sortFilteredPlanets } = usePlanetsContext();
+  const {sortFilteredPlanets} = usePlanetsContext();
 
   const onSetActiveSort = (newSortValue: SortPlanetsByE) => {
     sortFilteredPlanets(newSortValue);
     setActiveSort(newSortValue);
+    onTriggered();
   };
 
   return (

@@ -9,12 +9,13 @@ import usePlanetsContext from "../../store/PlanetsContext";
 import { StyledPlanetsWrapper } from "./styles";
 
 const PER_PAGE = 10;
+const DEFAULT_CURRENT_PAGE = 1;
 
 const Planets = () => {
   const {fetchPlanets} = usePlanets();
   const {paginate} = usePaginate();
   const {savePlanets, filteredPlanets} = usePlanetsContext();
-  const [currentPage, setCurrenPage] = useState(1);
+  const [currentPage, setCurrenPage] = useState(DEFAULT_CURRENT_PAGE);
 
   useEffect(() => {
     const planets = fetchPlanets();
@@ -35,12 +36,21 @@ const Planets = () => {
     ));
   };
 
+  const resetCurrentPage = () => {
+    setCurrenPage(DEFAULT_CURRENT_PAGE)
+  }
+
+  const onFilterSortTriggered = () => {
+    resetCurrentPage()
+  }
+
   return (
     <StyledPlanetsWrapper>
-      <FilterSort />
+      <FilterSort onTriggered={onFilterSortTriggered} />
       <ul className="planet-list">{getPlanetsElements()}</ul>
       <div data-testid="pagination-control-wrapper">
         <PaginationControls
+          parentControlledActivePage={currentPage}
           perPage={PER_PAGE}
           totalCount={filteredPlanets.length}
           onSelectPage={onSetCurrentPage}

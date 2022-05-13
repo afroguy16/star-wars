@@ -86,17 +86,14 @@ describe("Planets", () => {
 });
 
 describe("Planets", () => {
-  let baseElement: HTMLElement;
-
   afterEach(cleanup);
 
   beforeEach(() => {
-    const utils = render(
+    render(
       <PlanetsProvider>
         <Planets />
       </PlanetsProvider>
     );
-    baseElement = utils.baseElement;
   });
 
   it("should return a list sorted by name if it is sorted by name", () => {
