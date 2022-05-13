@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import PaginationControls from "../../components/pagination-controls";
 import Planet from "../../components/planet";
+import { PlanetT } from "../../components/planet/types";
+import { usePaginate } from "../../hooks/paginate";
 import { usePlanets } from "../../hooks/planets";
 import FilterSort from "../../layouts/filter-sort";
 import usePlanetsContext from "../../store/PlanetsContext";
@@ -9,8 +11,9 @@ import { StyledPlanetsWrapper } from "./styles";
 const PER_PAGE = 10;
 
 const Planets = () => {
-  const { fetchPlanets } = usePlanets();
-  const { savePlanets, filteredPlanets } = usePlanetsContext();
+  const {fetchPlanets} = usePlanets();
+  const {paginate} = usePaginate();
+  const {savePlanets, filteredPlanets} = usePlanetsContext();
   const [currentPage, setCurrenPage] = useState(1);
 
   useEffect(() => {
@@ -23,7 +26,9 @@ const Planets = () => {
   };
 
   const getPlanetsElements = () => {
-    return filteredPlanets.map((planet, index) => (
+    const paginatedPlanets = paginate(filteredPlanets, PER_PAGE, currentPage) as Array<PlanetT>
+
+    return paginatedPlanets.map((planet, index) => (
       <li key={index}>
         <Planet meta={planet} />
       </li>
