@@ -4,7 +4,7 @@ import Planet from "../../components/planet";
 import { PlanetT } from "../../components/planet/types";
 import { usePaginate } from "../../hooks/paginate";
 import { usePlanets } from "../../hooks/planets";
-import FilterSort from "../../layouts/filter-sort";
+import FilterSort from "../../layouts/filter-sort-planets";
 import usePlanetsContext from "../../store/PlanetsContext";
 import { StyledPlanetsWrapper } from "./styles";
 

@@ -4,7 +4,7 @@ export enum PlanetsActionsE {
 }
 
 export enum SortPlanetsByE {
-  NAME = 'NAME',
-  POPULATION = 'POPULATION',
-  RESIDENTS = 'RESIDENTS'
+  NAME = 'name',
+  POPULATION = 'population',
+  RESIDENTS = 'residents'
 }
