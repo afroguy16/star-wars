@@ -20,12 +20,10 @@ const OPTIONS: Set<SortPlanetsByE> = new Set([
 ]);
 
 const FilterSort = ({onTriggered}: Props) => {
-  const [, setActiveSort] = useState<SortPlanetsByE>();
   const {sortFilteredPlanets, searchPlanets} = usePlanetsContext();
 
   const onSetActiveSort = (newSortValue: SortPlanetsByE) => {
     sortFilteredPlanets(newSortValue)
-    setActiveSort(newSortValue)
     onTriggered()
   };
 
