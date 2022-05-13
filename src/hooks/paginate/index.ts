@@ -18,7 +18,7 @@ function usePaginate(): UsePaginate {
     if (perPage > arr.length) return arr
     if (currentPage < 1) throw new Error('Pagination config`s currentPage must be more than 0')
 
-    const availablePages = Math.round((arr.length / perPage))
+    const availablePages = Math.ceil((arr.length / perPage))
     if (currentPage > availablePages) throw new Error('Pagination config`s currentPage is out of bound, enter a lower page number')
 
     const startIndex = perPage * (currentPage - 1);

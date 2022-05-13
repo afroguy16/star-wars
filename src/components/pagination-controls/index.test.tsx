@@ -66,6 +66,9 @@ describe("PaginationControls with perPage and totalCount greater than zero", () 
 
     fireEvent.click(nextButton);
     fireEvent.click(nextButton);
+    fireEvent.click(nextButton);
+    fireEvent.click(nextButton);
+    fireEvent.click(nextButton);
     expect(nextButton).toHaveAttribute("disabled");
   });
 });

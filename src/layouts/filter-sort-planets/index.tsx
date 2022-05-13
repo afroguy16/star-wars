@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Select from "../../components/select";
-import { SortPlanetsByE } from "../../store/enums";
+import { SearchPlanetsByE, SortPlanetsByE } from "../../store/enums";
 import usePlanetsContext from "../../store/PlanetsContext";
 import { StyledFilterSortWrapper } from "./styles";
 
@@ -21,16 +21,22 @@ const OPTIONS: Set<SortPlanetsByE> = new Set([
 
 const FilterSort = ({onTriggered}: Props) => {
   const [, setActiveSort] = useState<SortPlanetsByE>();
-  const {sortFilteredPlanets} = usePlanetsContext();
+  const {sortFilteredPlanets, searchPlanets} = usePlanetsContext();
 
   const onSetActiveSort = (newSortValue: SortPlanetsByE) => {
-    sortFilteredPlanets(newSortValue);
-    setActiveSort(newSortValue);
-    onTriggered();
+    sortFilteredPlanets(newSortValue)
+    setActiveSort(newSortValue)
+    onTriggered()
   };
+
+  const onSearchByName = (query: string) => {
+    searchPlanets({key: SearchPlanetsByE.NAME, query: [query]})
+    onTriggered()
+  }
 
   return (
     <StyledFilterSortWrapper>
+      <input type="text" onChange={(e) => onSearchByName(e.target.value)} />
       <Select
         data-testid="sort"
         options={OPTIONS}

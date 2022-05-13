@@ -1,30 +1,26 @@
 import { render, cleanup, screen, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Planets from ".";
 import data from "../../data/planets.json";
 import {
   sortedResultsByName,
   sortedResultsByPopulation,
   sortedResultsByResidents,
+  mockSearchResult
 } from "../../mocks/transformed-planets-response";
 import { PlanetsProvider } from "../../store/PlanetsContext";
 
-describe("Planets", () => {
-  let baseElement: HTMLElement;
 
-  afterEach(cleanup);
-
+describe("Planets display and Pagination", () => {
   beforeEach(() => {
-    const utils = render(
+    render(
       <PlanetsProvider>
         <Planets />
       </PlanetsProvider>
     );
-    baseElement = utils.baseElement;
   });
 
-  it("should render successfully", () => {
-    expect(baseElement).toBeTruthy();
-  });
+  afterEach(cleanup);
 
   it("should rentur a list of 10 planets on the page", () => {
     const planetElementsCount =
@@ -85,7 +81,7 @@ describe("Planets", () => {
   });
 });
 
-describe("Planets", () => {
+describe("Planets Sorting", () => {
   afterEach(cleanup);
 
   beforeEach(() => {
@@ -124,5 +120,29 @@ describe("Planets", () => {
     const planetElements = screen.getAllByLabelText("planet");
     const firstPlanetElement = planetElements[0];
     expect(firstPlanetElement.innerHTML).toContain(sortedResultsByResidents[0].name);
+  });
+});
+
+describe("Planets Searching and Filtering", () => {
+  afterEach(cleanup);
+
+  beforeEach(() => {
+    render(
+      <PlanetsProvider>
+        <Planets />
+      </PlanetsProvider>
+    );
+  });
+
+  it("should return a list available planets that matches search query", () => {
+    const searchBox = screen.getByRole("textbox")
+
+    userEvent.type(searchBox, 'da')
+
+    const planetElements = screen.getAllByLabelText("planet")
+    const firstPlanetElement = planetElements[0];
+
+    expect(planetElements).toHaveLength(1)
+    expect(firstPlanetElement.innerHTML).toContain(mockSearchResult[0].name)
   });
 });

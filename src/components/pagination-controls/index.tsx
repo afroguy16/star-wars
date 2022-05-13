@@ -18,7 +18,7 @@ const PaginationControls = ({
   onSelectPage,
 }: Props) => {
   const [isValidProps, setIsValidProps] = useState(false);
-  const [listCount, setListCount] = useState(totalCount / perPage);
+  const [roundedPageCount, setRoundedPageCount] = useState(Math.ceil(totalCount/perPage));
   const [activePage, setActivePage] = useState(
     parentControlledActivePage
       ? parentControlledActivePage
@@ -35,13 +35,16 @@ const PaginationControls = ({
       return;
     }
     setIsValidProps(true);
-    setListCount(totalCount / perPage);
+    setRoundedPageCount(getRoundedPageCount());
   }, [totalCount, perPage]);
 
   const isActivePage = (pageNumber: number) => pageNumber === activePage;
 
+  const getRoundedPageCount = () => Math.ceil(totalCount/perPage)
+
   const getPageCountListElement = () => {
-    return [...Array(listCount)].map((_, index) => {
+    const roundedPageCount = getRoundedPageCount()
+    return [...Array(roundedPageCount)].map((_, index) => {
       const pageNumber = index + 1;
       return (
         <li
@@ -55,7 +58,7 @@ const PaginationControls = ({
     });
   };
 
-  const hasUpToTwoPage = () => listCount > 1;
+  const hasUpToTwoPage = () => roundedPageCount > 1;
 
   const handleOnSelectPages = (pageNumber: number) => {
     setActivePage(pageNumber);
@@ -78,7 +81,7 @@ const PaginationControls = ({
             <ButtonText
               text=">"
               onClick={() => handleOnSelectPages(activePage + 1)}
-              disabled={activePage === listCount}
+              disabled={activePage === roundedPageCount}
             />
           )}
         </StyledPaginationControlsWrapper>

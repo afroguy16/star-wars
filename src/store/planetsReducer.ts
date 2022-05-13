@@ -1,6 +1,6 @@
 import { PlanetT } from "../components/planet/types";
-import { PlanetsActionsE, SortPlanetsByE } from "./enums";
-import { PlanetsStateT, Action } from "./types";
+import { PlanetsActionsE, SearchPlanetsByE, SortPlanetsByE } from "./enums";
+import { PlanetsStateT, Action, SearchPlanetsPayloadT } from "./types";
 
 export const initialState: PlanetsStateT = {
   planets: [],
@@ -18,20 +18,27 @@ export const planetsReducer = (
         planets: [...(payload as Array<PlanetT>)],
         filteredPlanets: [...(payload as Array<PlanetT>)],
       };
+    case PlanetsActionsE.SEARCH_PLANETS:
+      const typedPayload = payload as SearchPlanetsPayloadT
+      const filteredPlanets = search(typedPayload.key, typedPayload.query, state.planets)
+      return {
+        ...state,
+        filteredPlanets: [...filteredPlanets],
+      };
     case PlanetsActionsE.SORT_FILTERED_PLANETS:
-      let sortedPlanets: Array<PlanetT>
+      let sortedPlanets: Array<PlanetT>;
       switch (payload) {
         case SortPlanetsByE.NAME:
-          sortedPlanets = sortPlanetsByName(state.filteredPlanets)
-          break
+          sortedPlanets = sortPlanetsByName(state.filteredPlanets);
+          break;
         case SortPlanetsByE.POPULATION:
-          sortedPlanets = sortPlanetsByPopulation(state.filteredPlanets)
-          break
+          sortedPlanets = sortPlanetsByPopulation(state.filteredPlanets);
+          break;
         case SortPlanetsByE.RESIDENTS:
-          sortedPlanets = sortPlanetsByResidents(state.filteredPlanets)
-          break
+          sortedPlanets = sortPlanetsByResidents(state.filteredPlanets);
+          break;
         default:
-          sortedPlanets = [...payload];
+          sortedPlanets = [...payload as Array<PlanetT>];
       }
       return {
         ...state,
@@ -42,7 +49,7 @@ export const planetsReducer = (
   }
 };
 
-const sortPlanetsByName = (planets: Array<PlanetT>) => (
+const sortPlanetsByName = (planets: Array<PlanetT>) =>
   planets.sort((a, b) => {
     const nameA = a.name.toUpperCase();
     const nameB = b.name.toUpperCase();
@@ -53,13 +60,16 @@ const sortPlanetsByName = (planets: Array<PlanetT>) => (
       return 1;
     }
     return 0;
-  })
-)
+  });
 
-const sortPlanetsByPopulation = (planets: Array<PlanetT>) => (
-  planets.sort((a, b) => a.population - b.population)
-)
+const sortPlanetsByPopulation = (planets: Array<PlanetT>) =>
+  planets.sort((a, b) => a.population - b.population);
 
-const sortPlanetsByResidents = (planets: Array<PlanetT>) => (
-  planets.sort((a, b) => a.residents - b.residents)
-)
+const sortPlanetsByResidents = (planets: Array<PlanetT>) =>
+  planets.sort((a, b) => a.residents - b.residents);
+
+const search = (
+  key: SearchPlanetsByE,
+  query: Array<string>,
+  planets: Array<PlanetT>
+) => planets.filter((planet) => planet[key].includes(query[0]))
