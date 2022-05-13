@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useCallback, useContext, useReducer } from "react"
 import { PlanetT } from "../components/planet/types"
-import { PlanetActionsE } from "./enums"
+import { PlanetsActionsE, SortPlanetsByE } from "./enums"
 import { initialState, planetsReducer } from "./planetsReducer"
-import { PlanetProviderT } from "./types"
+import { PlanetsContextT } from "./types"
 
 const PlanetsContext = createContext(initialState)
 
@@ -11,20 +11,28 @@ export const PlanetsProvider = ({children}: {children: ReactNode}) => {
 
   const savePlanets = useCallback((payload: Array<PlanetT>) => {
     dispatch({
-      type: PlanetActionsE.SAVE_PLANETS,
+      type: PlanetsActionsE.SAVE_PLANETS,
       payload
     })
   }, [])
 
-  const value = {
+  const sortFilteredPlanets = useCallback((payload: SortPlanetsByE) => {
+    dispatch({
+      type: PlanetsActionsE.SORT_FILTERED_PLANETS,
+      payload
+    })
+  }, [])
+
+  const value: PlanetsContextT = {
     planets: state.planets,
     filteredPlanets: state.filteredPlanets,
-    savePlanets
+    savePlanets,
+    sortFilteredPlanets
   }
 
   return <PlanetsContext.Provider value={value}>{children}</PlanetsContext.Provider>
 }
 
-const usePlanetsContext = () => useContext(PlanetsContext) as PlanetProviderT
+const usePlanetsContext = () => useContext(PlanetsContext) as PlanetsContextT
 
 export default usePlanetsContext

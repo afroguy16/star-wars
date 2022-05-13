@@ -1,3 +1,10 @@
-export enum PlanetActionsE {
-    SAVE_PLANETS = 'SAVE_PLANETS'
+export enum PlanetsActionsE {
+  SAVE_PLANETS = "SAVE_PLANETS",
+  SORT_FILTERED_PLANETS = "SORT_FILTERED_PLANETS",
+}
+
+export enum SortPlanetsByE {
+  NAME = 'NAME',
+  POPULATION = 'POPULATION',
+  RESIDENTS = 'RESIDENTS'
 }

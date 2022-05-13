@@ -1,23 +1,24 @@
-import { PlanetActionsE } from "./enums";
-import { PlanetActionsT, PlanetsStateT } from "./types";
+import { PlanetT } from "../components/planet/types";
+import { PlanetsActionsE } from "./enums";
+import {
+  PlanetsStateT,
+  Action,
+} from "./types";
 
 export const initialState: PlanetsStateT = {
   planets: [],
-  filteredPlanets: []
-}
+  filteredPlanets: [],
+};
 
-export const planetsReducer = (state: PlanetsStateT, { type, payload }: PlanetActionsT) => {
+export const planetsReducer = (state: PlanetsStateT, { type, payload }: Action): PlanetsStateT => {
   switch (type) {
-    case PlanetActionsE.SAVE_PLANETS:
-      if (payload) {
-        return {
-          ...state,
-          planets: [...payload],
-          filteredPlanets: [...payload]
-        }
-      }
-      throw new Error('Payload must not be undefined')
+    case PlanetsActionsE.SAVE_PLANETS:
+      return {
+        ...state,
+        planets: [...payload as Array<PlanetT>],
+        filteredPlanets: [...payload as Array<PlanetT>],
+      };
     default:
       return state;
   }
-}
+};

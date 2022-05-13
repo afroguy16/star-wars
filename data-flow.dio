@@ -1,139 +1,139 @@
 <mxfile host="65bd71144e">
     <diagram id="LbCDMPOj5YQWfOJViEG_" name="Page-1">
-        <mxGraphModel dx="2148" dy="1132" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="4660" dy="2580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="4" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="2" target="3">
+                <mxCell id="4" value="" style="edgeStyle=none;html=1;" parent="1" source="2" target="3" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="13" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="2" target="12">
+                <mxCell id="13" value="" style="edgeStyle=none;html=1;" parent="1" source="2" target="12" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="2" value="Planets page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
-                    <mxGeometry x="360" y="200" width="80" height="80" as="geometry"/>
+                <mxCell id="2" value="Planets page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
+                    <mxGeometry x="799" y="480" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="9" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="3" target="8">
+                <mxCell id="9" value="" style="edgeStyle=none;html=1;" parent="1" source="3" target="8" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="fetchPlanets" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="520" y="200" width="80" height="80" as="geometry"/>
+                <mxCell id="3" value="fetchPlanets" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="959" y="480" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="7" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="5" target="3">
+                <mxCell id="7" value="" style="edgeStyle=none;html=1;" parent="1" source="5" target="3" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="raw-planets" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="520" y="40" width="80" height="80" as="geometry"/>
+                <mxCell id="5" value="raw-planets" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="959" y="320" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="11" value="" style="edgeStyle=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="8" target="2">
+                <mxCell id="11" value="" style="edgeStyle=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="8" target="2" edge="1">
                     <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="440" y="400" as="targetPoint"/>
+                        <mxPoint x="879" y="680" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="8" value="process data" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="450" y="360" width="80" height="80" as="geometry"/>
+                <mxCell id="8" value="process data" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="889" y="640" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="18" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="12" target="17">
+                <mxCell id="18" value="" style="edgeStyle=none;html=1;" parent="1" source="12" target="17" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="12" value="dispatchSaveData" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="200" y="200" width="80" height="80" as="geometry"/>
+                <mxCell id="12" value="dispatchSaveData" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
+                    <mxGeometry x="639" y="480" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="16" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="14" target="15">
+                <mxCell id="16" value="" style="edgeStyle=none;html=1;" parent="1" source="14" target="15" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="14" value="dataStream from filtered data" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="200" y="680" width="80" height="80" as="geometry"/>
+                <mxCell id="14" value="dataStream from filtered data" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
+                    <mxGeometry x="639" y="960" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="20" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="15" target="19">
+                <mxCell id="20" value="" style="edgeStyle=none;html=1;" parent="1" source="15" target="19" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="15" value="Planet page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
-                    <mxGeometry x="360" y="680" width="80" height="80" as="geometry"/>
+                <mxCell id="15" value="Planet page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
+                    <mxGeometry x="799" y="960" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="17" value="save to planets and save to filtered data" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="200" y="360" width="80" height="80" as="geometry"/>
+                <mxCell id="17" value="save to planets and save to filtered data" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="639" y="640" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="22" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="19" target="21">
+                <mxCell id="22" value="" style="edgeStyle=none;html=1;" parent="1" source="19" target="21" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="19" value="paginate" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="520" y="680" width="80" height="80" as="geometry"/>
+                <mxCell id="19" value="paginate" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="959" y="960" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="21" value="display" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="680" y="680" width="80" height="80" as="geometry"/>
+                <mxCell id="21" value="display" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1119" y="960" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="25" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="23" target="19">
+                <mxCell id="25" value="" style="edgeStyle=none;html=1;" parent="1" source="23" target="19" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="23" value="emit pagination state" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="520" y="520" width="80" height="80" as="geometry"/>
+                <mxCell id="23" value="emit pagination state" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="959" y="800" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="28" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="26" target="27">
+                <mxCell id="28" value="" style="edgeStyle=none;html=1;" parent="1" source="26" target="27" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="26" value="Sort" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="680" y="840" width="80" height="80" as="geometry"/>
+                <mxCell id="26" value="Sort" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1119" y="1120" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="31" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="27" target="30">
+                <mxCell id="31" value="" style="edgeStyle=none;html=1;" parent="1" source="27" target="30" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="27" value="dispatch sortPlanets" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="840" y="840" width="80" height="80" as="geometry"/>
+                <mxCell id="27" value="dispatch sortPlanets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
+                    <mxGeometry x="1279" y="1120" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="33" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="29" target="32">
+                <mxCell id="33" value="" style="edgeStyle=none;html=1;" parent="1" source="29" target="32" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="29" value="Search/Filter" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="680" y="1000" width="80" height="80" as="geometry"/>
+                <mxCell id="29" value="Search/Filter" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1119" y="1280" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="39" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="30" target="38">
+                <mxCell id="39" value="" style="edgeStyle=none;html=1;" parent="1" source="30" target="38" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="30" value="sort filtered Planets" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="1000" y="840" width="80" height="80" as="geometry"/>
+                <mxCell id="30" value="sort filtered Planets" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1439" y="1120" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="35" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="32" target="34">
+                <mxCell id="35" value="" style="edgeStyle=none;html=1;" parent="1" source="32" target="34" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="32" value="dispatch filterPlanets" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="840" y="1000" width="80" height="80" as="geometry"/>
+                <mxCell id="32" value="dispatch filterPlanets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
+                    <mxGeometry x="1279" y="1280" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="37" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="34" target="36">
+                <mxCell id="37" value="" style="edgeStyle=none;html=1;" parent="1" source="34" target="36" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="34" value="search Planets" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="1000" y="1000" width="80" height="80" as="geometry"/>
+                <mxCell id="34" value="search Planets" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1439" y="1280" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="36" value="update filtered planets with filtered planets" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="1160" y="1000" width="80" height="80" as="geometry"/>
+                <mxCell id="36" value="update filtered planets with filtered planets" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1599" y="1280" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="38" value="update Filtered planets with sorted filtered planets" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="1160" y="840" width="80" height="80" as="geometry"/>
+                <mxCell id="38" value="update Filtered planets with sorted filtered planets" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1599" y="1120" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="57" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="50" target="26">
+                <mxCell id="57" value="" style="edgeStyle=none;html=1;" parent="1" source="50" target="26" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="50" value="Sort/Filter layout" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="520" y="840" width="80" height="80" as="geometry"/>
+                <mxCell id="50" value="Sort/Filter layout" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="1" vertex="1">
+                    <mxGeometry x="959" y="1120" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="56" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="52" target="50">
+                <mxCell id="56" value="" style="edgeStyle=none;html=1;" parent="1" source="52" target="50" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="52" value="Planet page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
-                    <mxGeometry x="360" y="840" width="80" height="80" as="geometry"/>
+                <mxCell id="52" value="Planet page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
+                    <mxGeometry x="799" y="1120" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="59" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="54" target="29">
+                <mxCell id="59" value="" style="edgeStyle=none;html=1;" parent="1" source="54" target="29" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="54" value="Sort/Filter layout" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="520" y="1000" width="80" height="80" as="geometry"/>
+                <mxCell id="54" value="Sort/Filter layout" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="1" vertex="1">
+                    <mxGeometry x="959" y="1280" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="58" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="55" target="54">
+                <mxCell id="58" value="" style="edgeStyle=none;html=1;" parent="1" source="55" target="54" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="55" value="Planet page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
-                    <mxGeometry x="360" y="1000" width="80" height="80" as="geometry"/>
+                <mxCell id="55" value="Planet page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
+                    <mxGeometry x="799" y="1280" width="80" height="80" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
