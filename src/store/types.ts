@@ -6,7 +6,8 @@ export type PlanetsContextT = {
   filteredPlanets: Array<PlanetT>;
   searchedPlanets: Array<PlanetT>;
   savePlanets: (payload: Array<PlanetT>) => void;
-  searchPlanets: (playload: string) => void;
+  searchPlanets: (payload: string) => void;
+  filterPlanets: (payload: Array<string>) => void;
   sortFilteredPlanets: (payload: SortPlanetsByE) => void;
 };
 

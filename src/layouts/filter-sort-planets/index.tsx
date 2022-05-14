@@ -21,7 +21,7 @@ const OPTIONS: Set<SortPlanetsByE> = new Set([
 ]);
 
 const FilterSort = ({ onTriggered }: Props) => {
-  const { filteredPlanets, sortFilteredPlanets, searchPlanets } =
+  const { searchedPlanets, sortFilteredPlanets, searchPlanets, filterPlanets } =
     usePlanetsContext();
 
   const onGetTerrainOptions = (planets: Array<PlanetT>) => {
@@ -48,8 +48,8 @@ const FilterSort = ({ onTriggered }: Props) => {
     onTriggered();
   };
 
-  const onSearchByTerrain = (selectedTerrain: Array<string>) => {
-    // searchPlanets({key: SearchOrFilterPlanetsByE.TERRAIN, query: selectedTerrain})
+  const onFilterPlanets = (selectedTerrain: Array<string>) => {
+    filterPlanets(selectedTerrain)
     onTriggered();
   }
 
@@ -57,9 +57,9 @@ const FilterSort = ({ onTriggered }: Props) => {
     <StyledFilterSortWrapper>
       <input type="text" onChange={(e) => onSearchByName(e.target.value)} />
       <SelectMulti
-        options={onGetTerrainOptions(filteredPlanets)}
+        options={onGetTerrainOptions(searchedPlanets)}
         searchable
-        onValueChange={onSearchByTerrain}
+        onValueChange={onFilterPlanets}
       />
       <Select
         data-testid="sort"

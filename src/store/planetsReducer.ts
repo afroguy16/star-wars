@@ -1,11 +1,15 @@
 import { PlanetT } from "../components/planet/types";
-import { PlanetsActionsE, SearchOrFilterPlanetsByE, SortPlanetsByE } from "./enums";
+import {
+  PlanetsActionsE,
+  SearchOrFilterPlanetsByE,
+  SortPlanetsByE,
+} from "./enums";
 import { PlanetsStateT, Action } from "./types";
 
 export const initialState: PlanetsStateT = {
   planets: [],
   filteredPlanets: [],
-  searchedPlanets: []
+  searchedPlanets: [],
 };
 
 export const planetsReducer = (
@@ -17,21 +21,29 @@ export const planetsReducer = (
       return {
         ...state,
         planets: [...(payload as Array<PlanetT>)],
+        searchedPlanets: [...(payload as Array<PlanetT>)],
         filteredPlanets: [...(payload as Array<PlanetT>)],
       };
     case PlanetsActionsE.SEARCH_PLANETS:
-      const searchedPlanets = search(SearchOrFilterPlanetsByE.NAME, [payload as string], state.planets)
+      const searchedPlanets = search(
+        SearchOrFilterPlanetsByE.NAME,
+        [payload as string],
+        state.planets
+      );
       return {
         ...state,
         searchedPlanets: [...searchedPlanets],
-        filteredPlanets: [...searchedPlanets]
+        filteredPlanets: [...searchedPlanets],
       };
     case PlanetsActionsE.FILTER_PLANETS:
-      // const typedPayload = payload as SearchPlanetsPayloadT
-      // const filteredPlanets = search(typedPayload.key, typedPayload.query, state.planets)
+      const filteredPlanets = search(
+        SearchOrFilterPlanetsByE.TERRAIN,
+        payload as Array<string>,
+        state.searchedPlanets
+      );
       return {
         ...state,
-        // filteredPlanets: [...filteredPlanets],
+        filteredPlanets: [...filteredPlanets],
       };
     case PlanetsActionsE.SORT_FILTERED_PLANETS:
       let sortedPlanets: Array<PlanetT>;
@@ -46,7 +58,7 @@ export const planetsReducer = (
           sortedPlanets = sortPlanetsByResidents(state.filteredPlanets);
           break;
         default:
-          sortedPlanets = [...payload as Array<PlanetT>];
+          sortedPlanets = [...(payload as Array<PlanetT>)];
       }
       return {
         ...state,
@@ -81,10 +93,12 @@ const search = (
   query: Array<string>,
   planets: Array<PlanetT>
 ) => {
-  if (query.length === 0) return planets
-  if (query.length === 1) return planets.filter((planet) => planet[key].includes(query[0]))
+  if (query.length === 0) return planets;
+  if (query.length === 1)
+    return planets.filter((planet) => planet[key].includes(query[0]));
 
-  const planetTerrain: Array<Array<string>> = []
+  console.log('called')
+  const planetTerrain: Array<Array<string>> = [];
 
   planets.forEach(
     (planet) =>
@@ -94,23 +108,27 @@ const search = (
       planetTerrain.push(planet.terrain)
   );
 
-  return searchMultiple(query, planetTerrain, planets)
-}
+  return searchMultiple(query, planetTerrain, planets);
+};
 
-const searchMultiple = (queryArray: Array<string>, terrainArray: Array<Array<string>>, planets: Array<PlanetT>) => {
-  const mem: Array<number> = []
+const searchMultiple = (
+  queryArray: Array<string>,
+  terrainArray: Array<Array<string>>,
+  planets: Array<PlanetT>
+) => {
+  const mem: Array<number> = [];
 
   terrainArray.forEach((arr, index) => {
-    let matchFound = 0
+    let matchFound = 0;
     for (let j = 0; j < queryArray.length; j++) {
       if (arr.includes(queryArray[j])) {
-        matchFound++
+        matchFound++;
       }
     }
     if (matchFound === queryArray.length) {
-      mem.push(index)
+      mem.push(index);
     }
-  })
+  });
 
-  return planets.filter((_, i) => mem.includes(i))
-}
+  return planets.filter((_, i) => mem.includes(i));
+};
