@@ -72,4 +72,37 @@ const search = (
   key: SearchPlanetsByE,
   query: Array<string>,
   planets: Array<PlanetT>
-) => planets.filter((planet) => planet[key].includes(query[0]))
+) => {
+  if (query.length === 0) return planets
+  if (query.length === 1) return planets.filter((planet) => planet[key].includes(query[0]))
+
+  const planetTerrain: Array<Array<string>> = []
+
+  planets.forEach(
+    (planet) =>
+      planet.terrain !== ["unknown"] &&
+      planet.terrain !== [""] &&
+      planet.terrain.length > 0 &&
+      planetTerrain.push(planet.terrain)
+  );
+
+  return searchMultiple(query, planetTerrain, planets)
+}
+
+const searchMultiple = (queryArray: Array<string>, terrainArray: Array<Array<string>>, planets: Array<PlanetT>) => {
+  const mem: Array<number> = []
+
+  terrainArray.forEach((arr, index) => {
+    let matchFound = 0
+    for (let j = 0; j < queryArray.length; j++) {
+      if (arr.includes(queryArray[j])) {
+        matchFound++
+      }
+    }
+    if (matchFound === queryArray.length) {
+      mem.push(index)
+    }
+  })
+
+  return planets.filter((_, i) => mem.includes(i))
+}

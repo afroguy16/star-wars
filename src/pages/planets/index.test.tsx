@@ -145,4 +145,23 @@ describe("Planets Searching and Filtering", () => {
     expect(planetElements).toHaveLength(1)
     expect(firstPlanetElement.innerHTML).toContain(mockSearchResult[0].name)
   });
+
+  it("should return a list available planets that matches selected terrain", () => {
+    let terrainFilterOptions = screen.getAllByRole("checkbox")
+    let firstOptionElement = terrainFilterOptions[0]
+    let secondOptionElement = terrainFilterOptions[1]
+
+    userEvent.click(firstOptionElement)
+    let planetElements = screen.getAllByLabelText("planet")
+    const firstPlanetElement = planetElements[0]
+    expect(planetElements).toHaveLength(12)
+    expect(firstPlanetElement.innerHTML).toContain(data.results[0].name)
+
+    userEvent.click(secondOptionElement)
+    planetElements = screen.getAllByLabelText("planet")
+    const secondPlanetElement = planetElements[0]
+    expect(planetElements).toHaveLength(18)
+    expect(firstPlanetElement.innerHTML).toContain(data.results[0].name)
+    expect(secondPlanetElement.innerHTML).toContain(data.results[0].name)
+  });
 });
