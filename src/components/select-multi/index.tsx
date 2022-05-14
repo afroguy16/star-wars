@@ -8,13 +8,24 @@ type Props = {
   onValueChange: (updatedState: Array<string>) => void;
 };
 
+type SelectedOptions = {
+  [key: number]: string;
+};
+
 const SelectMulti = ({ options, label, searchable, onValueChange }: Props) => {
-  const [selectedOptions, setSelectedOptions] = useState<Array<string>>([]);
+  const [unfilteredSelectedOptions, setUnfilteredSelectedOptions] =
+    useState<SelectedOptions>({});
   const [filteredOptions, setFilteredOptions] = useState([...options]);
 
   useEffect(() => {
     setFilteredOptions([...options]);
   }, [options]);
+
+  const isSelected = (index: number) =>
+    unfilteredSelectedOptions[index] === filteredOptions[index];
+
+  const filteredSelectedOptions = (rawSelectedOptions: SelectedOptions) =>
+    Object.values(rawSelectedOptions).filter((value) => value !== "");
 
   // This could be made a hook to avoid repeatition
   const onFilterOptions = (query: string) => {
@@ -25,24 +36,26 @@ const SelectMulti = ({ options, label, searchable, onValueChange }: Props) => {
     setFilteredOptions([...filtered]);
   };
 
-  const handleOnChange = (value: string) => {
-    let updatedSelectedOptions = [...selectedOptions];
-    const valueIndex = updatedSelectedOptions.findIndex(
-      (options) => options === value
-    );
+  const handleOnChange = (index: number) => {
+    let updatedSelectedOptions = { ...unfilteredSelectedOptions };
 
-    if (valueIndex >= 0) {
-      updatedSelectedOptions.splice(valueIndex, 1);
+    if (
+      !updatedSelectedOptions.hasOwnProperty(index) ||
+      updatedSelectedOptions[index] === ""
+    ) {
+      updatedSelectedOptions[index] = filteredOptions[index];
     } else {
-      updatedSelectedOptions.push(value);
+      updatedSelectedOptions[index] = "";
     }
 
-    setSelectedOptions(updatedSelectedOptions);
-    onValueChange(updatedSelectedOptions);
+    setUnfilteredSelectedOptions(updatedSelectedOptions);
+
+    const valueToSend = filteredSelectedOptions(updatedSelectedOptions);
+    onValueChange(valueToSend);
   };
 
   const getSelectedOptionsCountElement = () => {
-    const count = selectedOptions.length;
+    const count = filteredSelectedOptions(unfilteredSelectedOptions).length;
 
     if (count < 1) return <p aria-label="selected count">0 item selected</p>;
     if (count > 1)
@@ -55,10 +68,11 @@ const SelectMulti = ({ options, label, searchable, onValueChange }: Props) => {
     filteredOptions.map((option, index) => (
       <div key={index}>
         <input
+          checked={isSelected(index)}
           key={index}
           type="checkbox"
           name={option}
-          onChange={(e) => handleOnChange(e.target.name)}
+          onChange={() => handleOnChange(index)}
           id={option}
         />
         <label htmlFor={option}>{option}</label>
