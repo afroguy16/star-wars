@@ -347,13 +347,3 @@ export const sortedResultsByResidents: PlanetT[] = [
     residents: 11,
   },
 ];
-
-export const mockSearchResult: PlanetT[] = [
-  {
-    name: "Toydaria",
-    climate: ["temperate"],
-    terrain: ["swamps", "lakes"],
-    population: 11000000,
-    residents: 1
-  }
-];

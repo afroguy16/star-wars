@@ -94,10 +94,9 @@ const search = (
   planets: Array<PlanetT>
 ) => {
   if (query.length === 0) return planets;
-  if (query.length === 1)
-    return planets.filter((planet) => planet[key].includes(query[0]));
+  if (query.length === 1 && typeof planets[0][key] === 'string')
+    return planets.filter((planet) => (planet[key] as string).toLowerCase().includes(query[0].toLowerCase()));
 
-  console.log('called')
   const planetTerrain: Array<Array<string>> = [];
 
   planets.forEach(

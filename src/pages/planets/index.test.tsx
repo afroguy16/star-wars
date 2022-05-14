@@ -5,8 +5,7 @@ import data from "../../data/planets.json";
 import {
   sortedResultsByName,
   sortedResultsByPopulation,
-  sortedResultsByResidents,
-  mockSearchResult
+  sortedResultsByResidents
 } from "../../mocks/transformed-planets-response";
 import { PlanetsProvider } from "../../store/PlanetsContext";
 
@@ -135,33 +134,26 @@ describe("Planets Searching and Filtering", () => {
   });
 
   it("should return a list available planets that matches search query", () => {
-    const searchBox = screen.getByRole("textbox")
+    const searchBox = screen.getAllByRole("textbox")[0]
 
     userEvent.type(searchBox, 'da')
 
     const planetElements = screen.getAllByLabelText("planet")
-    const firstPlanetElement = planetElements[0];
 
-    expect(planetElements).toHaveLength(1)
-    expect(firstPlanetElement.innerHTML).toContain(mockSearchResult[0].name)
+    expect(planetElements).toHaveLength(5)
   });
 
   it("should return a list available planets that matches selected terrain", () => {
     let terrainFilterOptions = screen.getAllByRole("checkbox")
     let firstOptionElement = terrainFilterOptions[0]
-    let secondOptionElement = terrainFilterOptions[1]
+    let thirdOptionElement = terrainFilterOptions[2]
 
     userEvent.click(firstOptionElement)
     let planetElements = screen.getAllByLabelText("planet")
-    const firstPlanetElement = planetElements[0]
-    expect(planetElements).toHaveLength(12)
-    expect(firstPlanetElement.innerHTML).toContain(data.results[0].name)
+    expect(planetElements).toHaveLength(4)
 
-    userEvent.click(secondOptionElement)
+    userEvent.click(thirdOptionElement)
     planetElements = screen.getAllByLabelText("planet")
-    const secondPlanetElement = planetElements[0]
-    expect(planetElements).toHaveLength(18)
-    expect(firstPlanetElement.innerHTML).toContain(data.results[0].name)
-    expect(secondPlanetElement.innerHTML).toContain(data.results[0].name)
+    expect(planetElements).toHaveLength(2)
   });
 });
