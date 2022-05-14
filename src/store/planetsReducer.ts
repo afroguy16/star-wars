@@ -1,10 +1,11 @@
 import { PlanetT } from "../components/planet/types";
-import { PlanetsActionsE, SearchPlanetsByE, SortPlanetsByE } from "./enums";
-import { PlanetsStateT, Action, SearchPlanetsPayloadT } from "./types";
+import { PlanetsActionsE, SearchOrFilterPlanetsByE, SortPlanetsByE } from "./enums";
+import { PlanetsStateT, Action } from "./types";
 
 export const initialState: PlanetsStateT = {
   planets: [],
   filteredPlanets: [],
+  searchedPlanets: []
 };
 
 export const planetsReducer = (
@@ -19,11 +20,18 @@ export const planetsReducer = (
         filteredPlanets: [...(payload as Array<PlanetT>)],
       };
     case PlanetsActionsE.SEARCH_PLANETS:
-      const typedPayload = payload as SearchPlanetsPayloadT
-      const filteredPlanets = search(typedPayload.key, typedPayload.query, state.planets)
+      const searchedPlanets = search(SearchOrFilterPlanetsByE.NAME, [payload as string], state.planets)
       return {
         ...state,
-        filteredPlanets: [...filteredPlanets],
+        searchedPlanets: [...searchedPlanets],
+        filteredPlanets: [...searchedPlanets]
+      };
+    case PlanetsActionsE.FILTER_PLANETS:
+      // const typedPayload = payload as SearchPlanetsPayloadT
+      // const filteredPlanets = search(typedPayload.key, typedPayload.query, state.planets)
+      return {
+        ...state,
+        // filteredPlanets: [...filteredPlanets],
       };
     case PlanetsActionsE.SORT_FILTERED_PLANETS:
       let sortedPlanets: Array<PlanetT>;
@@ -69,7 +77,7 @@ const sortPlanetsByResidents = (planets: Array<PlanetT>) =>
   planets.sort((a, b) => a.residents - b.residents);
 
 const search = (
-  key: SearchPlanetsByE,
+  key: SearchOrFilterPlanetsByE,
   query: Array<string>,
   planets: Array<PlanetT>
 ) => {

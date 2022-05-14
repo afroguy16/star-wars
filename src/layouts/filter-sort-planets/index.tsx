@@ -1,7 +1,7 @@
 import { PlanetT } from "../../components/planet/types";
 import Select from "../../components/select";
 import SelectMulti from "../../components/select-multi";
-import { SearchPlanetsByE, SortPlanetsByE } from "../../store/enums";
+import { SearchOrFilterPlanetsByE, SortPlanetsByE } from "../../store/enums";
 import usePlanetsContext from "../../store/PlanetsContext";
 import { StyledFilterSortWrapper } from "./styles";
 
@@ -44,12 +44,12 @@ const FilterSort = ({ onTriggered }: Props) => {
   };
 
   const onSearchByName = (query: string) => {
-    searchPlanets({ key: SearchPlanetsByE.NAME, query: [query] });
+    searchPlanets(query);
     onTriggered();
   };
 
   const onSearchByTerrain = (selectedTerrain: Array<string>) => {
-    searchPlanets({key: SearchPlanetsByE.TERRAIN, query: selectedTerrain})
+    // searchPlanets({key: SearchOrFilterPlanetsByE.TERRAIN, query: selectedTerrain})
     onTriggered();
   }
 

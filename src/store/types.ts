@@ -1,23 +1,20 @@
 import { PlanetT } from "../components/planet/types";
-import { PlanetsActionsE, SearchPlanetsByE, SortPlanetsByE } from "./enums";
+import { PlanetsActionsE, SortPlanetsByE } from "./enums";
 
 export type PlanetsContextT = {
-  planets: PlanetT[];
-  filteredPlanets: PlanetT[];
+  planets: Array<PlanetT>;
+  filteredPlanets: Array<PlanetT>;
+  searchedPlanets: Array<PlanetT>;
   savePlanets: (payload: Array<PlanetT>) => void;
-  searchPlanets: (playload: SearchPlanetsPayloadT) => void;
+  searchPlanets: (playload: string) => void;
   sortFilteredPlanets: (payload: SortPlanetsByE) => void;
 };
 
 export type PlanetsStateT = {
   planets: Array<PlanetT>;
+  searchedPlanets: Array<PlanetT>;
   filteredPlanets: Array<PlanetT>;
 };
-
-export type SearchPlanetsPayloadT = {
-  query: Array<string>,
-  key: SearchPlanetsByE
-}
 
 export type PlanetsActionsBaseT = {
   type: PlanetsActionsE;
@@ -32,10 +29,15 @@ export type SortPlanetsActionT = PlanetsActionsBaseT & {
 };
 
 export type SearchPlanetsActionT = PlanetsActionsBaseT & {
-  payload: SearchPlanetsPayloadT;
+  payload: string;
+};
+
+export type FilterPlanetsActionT = PlanetsActionsBaseT & {
+  payload: Array<string>;
 };
 
 export type Action =
   | UpdatePlanetsActionT
   | SortPlanetsActionT
-  | SearchPlanetsActionT;
+  | SearchPlanetsActionT
+  | FilterPlanetsActionT

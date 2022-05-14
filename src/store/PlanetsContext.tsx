@@ -2,7 +2,7 @@ import { createContext, ReactNode, useCallback, useContext, useReducer } from "r
 import { PlanetT } from "../components/planet/types"
 import { PlanetsActionsE, SortPlanetsByE } from "./enums"
 import { initialState, planetsReducer } from "./planetsReducer"
-import { PlanetsContextT, SearchPlanetsPayloadT } from "./types"
+import { PlanetsContextT } from "./types"
 
 const PlanetsContext = createContext(initialState)
 
@@ -16,7 +16,7 @@ export const PlanetsProvider = ({children}: {children: ReactNode}) => {
     })
   }, [])
 
-  const searchPlanets = useCallback((payload: SearchPlanetsPayloadT) => {
+  const searchPlanets = useCallback((payload: string) => {
     dispatch({
       type: PlanetsActionsE.SEARCH_PLANETS,
       payload
@@ -33,6 +33,7 @@ export const PlanetsProvider = ({children}: {children: ReactNode}) => {
   const value: PlanetsContextT = {
     planets: state.planets,
     filteredPlanets: state.filteredPlanets,
+    searchedPlanets: state.searchedPlanets,
     savePlanets,
     searchPlanets,
     sortFilteredPlanets,
