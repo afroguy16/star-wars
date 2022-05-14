@@ -1,7 +1,7 @@
 import { PlanetT } from "../../components/planet/types";
 import Select from "../../components/select";
 import SelectMulti from "../../components/select-multi";
-import { SearchOrFilterPlanetsByE, SortPlanetsByE } from "../../store/enums";
+import { SortPlanetsByE } from "../../store/enums";
 import usePlanetsContext from "../../store/PlanetsContext";
 import { StyledFilterSortWrapper } from "./styles";
 
@@ -24,7 +24,7 @@ const FilterSort = ({ onTriggered }: Props) => {
   const { searchedPlanets, sortFilteredPlanets, searchPlanets, filterPlanets } =
     usePlanetsContext();
 
-  const onGetTerrainOptions = (planets: Array<PlanetT>) => {
+  const getTerrainOptions = (planets: Array<PlanetT>) => {
     const terrainOptions: Array<Array<string>> = [];
 
     planets.forEach(
@@ -57,7 +57,7 @@ const FilterSort = ({ onTriggered }: Props) => {
     <StyledFilterSortWrapper>
       <input type="text" onChange={(e) => onSearchByName(e.target.value)} />
       <SelectMulti
-        options={onGetTerrainOptions(searchedPlanets)}
+        options={getTerrainOptions(searchedPlanets)}
         searchable
         onValueChange={onFilterPlanets}
       />

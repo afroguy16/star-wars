@@ -1,4 +1,5 @@
 import { PlanetT } from "../components/planet/types";
+import useSearch from "../hooks/search";
 import {
   PlanetsActionsE,
   SearchOrFilterPlanetsByE,
@@ -12,10 +13,12 @@ export const initialState: PlanetsStateT = {
   searchedPlanets: [],
 };
 
-export const planetsReducer = (
+export const usePlanetsReducer = (
   state: PlanetsStateT,
   { type, payload }: Action
 ): PlanetsStateT => {
+  const { search } = useSearch();
+
   switch (type) {
     case PlanetsActionsE.SAVE_PLANETS:
       return {
@@ -24,27 +27,30 @@ export const planetsReducer = (
         searchedPlanets: [...(payload as Array<PlanetT>)],
         filteredPlanets: [...(payload as Array<PlanetT>)],
       };
+
     case PlanetsActionsE.SEARCH_PLANETS:
       const searchedPlanets = search(
         SearchOrFilterPlanetsByE.NAME,
         [payload as string],
         state.planets
-      );
+      ) as Array<PlanetT>;
       return {
         ...state,
         searchedPlanets: [...searchedPlanets],
         filteredPlanets: [...searchedPlanets],
       };
+
     case PlanetsActionsE.FILTER_PLANETS:
       const filteredPlanets = search(
         SearchOrFilterPlanetsByE.TERRAIN,
         payload as Array<string>,
         state.searchedPlanets
-      );
+      ) as Array<PlanetT>;
       return {
         ...state,
         filteredPlanets: [...filteredPlanets],
       };
+
     case PlanetsActionsE.SORT_FILTERED_PLANETS:
       let sortedPlanets: Array<PlanetT>;
       switch (payload) {
@@ -64,6 +70,7 @@ export const planetsReducer = (
         ...state,
         filteredPlanets: [...sortedPlanets],
       };
+
     default:
       return state;
   }
@@ -87,47 +94,3 @@ const sortPlanetsByPopulation = (planets: Array<PlanetT>) =>
 
 const sortPlanetsByResidents = (planets: Array<PlanetT>) =>
   planets.sort((a, b) => a.residents - b.residents);
-
-const search = (
-  key: SearchOrFilterPlanetsByE,
-  query: Array<string>,
-  planets: Array<PlanetT>
-) => {
-  if (query.length === 0) return planets;
-  if (query.length === 1 && typeof planets[0][key] === 'string')
-    return planets.filter((planet) => (planet[key] as string).toLowerCase().includes(query[0].toLowerCase()));
-
-  const planetTerrain: Array<Array<string>> = [];
-
-  planets.forEach(
-    (planet) =>
-      planet.terrain !== ["unknown"] &&
-      planet.terrain !== [""] &&
-      planet.terrain.length > 0 &&
-      planetTerrain.push(planet.terrain)
-  );
-
-  return searchMultiple(query, planetTerrain, planets);
-};
-
-const searchMultiple = (
-  queryArray: Array<string>,
-  terrainArray: Array<Array<string>>,
-  planets: Array<PlanetT>
-) => {
-  const mem: Array<number> = [];
-
-  terrainArray.forEach((arr, index) => {
-    let matchFound = 0;
-    for (let j = 0; j < queryArray.length; j++) {
-      if (arr.includes(queryArray[j])) {
-        matchFound++;
-      }
-    }
-    if (matchFound === queryArray.length) {
-      mem.push(index);
-    }
-  });
-
-  return planets.filter((_, i) => mem.includes(i));
-};
