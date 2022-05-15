@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="LbCDMPOj5YQWfOJViEG_" name="Latest design">
-        <mxGraphModel dx="1131" dy="723" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+        <mxGraphModel dx="4287" dy="2403" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -11,168 +11,180 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="2" value="Planets page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
-                    <mxGeometry x="799" y="480" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="720" y="240" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="9" value="" style="edgeStyle=none;html=1;" parent="1" source="3" target="8" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="3" value="fetchPlanets" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-                    <mxGeometry x="959" y="480" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="880" y="240" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="7" value="" style="edgeStyle=none;html=1;" parent="1" source="5" target="3" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="raw-planets" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-                    <mxGeometry x="959" y="320" width="80" height="80" as="geometry"/>
+                <mxCell id="5" value="raw-planets.json" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="80" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="11" value="" style="edgeStyle=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="8" target="2" edge="1">
                     <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="879" y="680" as="targetPoint"/>
+                        <mxPoint x="800" y="440" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="8" value="process data" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-                    <mxGeometry x="889" y="640" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="810" y="400" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="18" value="" style="edgeStyle=none;html=1;" parent="1" source="12" target="17" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="12" value="dispatchSaveData" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#a0522d;fontColor=#ffffff;strokeColor=#6D1F00;" parent="1" vertex="1">
-                    <mxGeometry x="639" y="480" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="560" y="240" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="16" value="" style="edgeStyle=none;html=1;" parent="1" source="14" target="15" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="14" value="dataStream from filtered data" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="1" vertex="1">
-                    <mxGeometry x="639" y="960" width="80" height="80" as="geometry"/>
+                <mxCell id="14" value="filteredPlanets dataStream from PlanetContext&amp;nbsp;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="1" vertex="1">
+                    <mxGeometry x="560" y="720" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="20" value="" style="edgeStyle=none;html=1;" parent="1" source="15" target="19" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="15" value="Planet page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
-                    <mxGeometry x="799" y="960" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="720" y="720" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="17" value="save to planets and save to filtered data" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
-                    <mxGeometry x="639" y="640" width="80" height="80" as="geometry"/>
+                <mxCell id="17" value="save to planets, searchedPlanets and filteredPlanets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
+                    <mxGeometry x="560" y="400" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="22" value="" style="edgeStyle=none;html=1;" parent="1" source="19" target="21" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="19" value="paginate" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-                    <mxGeometry x="959" y="960" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="880" y="720" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="21" value="display" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-                    <mxGeometry x="1119" y="960" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="1040" y="720" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="25" value="" style="edgeStyle=none;html=1;" parent="1" source="23" target="19" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="23" value="emit pagination state" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-                    <mxGeometry x="959" y="800" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="880" y="560" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="28" value="" style="edgeStyle=none;html=1;" parent="1" source="26" target="27" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="26" value="Sort" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-                    <mxGeometry x="1119" y="1120" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="1040" y="880" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="31" value="" style="edgeStyle=none;html=1;" parent="1" source="27" target="30" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
+                <mxCell id="61" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="27" target="60">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
                 <mxCell id="27" value="dispatch sortPlanets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#a0522d;fontColor=#ffffff;strokeColor=#6D1F00;" parent="1" vertex="1">
-                    <mxGeometry x="1279" y="1120" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="1200" y="880" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="33" value="" style="edgeStyle=none;html=1;" parent="1" source="29" target="32" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="29" value="Search" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-                    <mxGeometry x="1119" y="1280" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="1040" y="1200" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="39" value="" style="edgeStyle=none;html=1;" parent="1" source="30" target="38" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="30" value="sort filtered Planets" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-                    <mxGeometry x="1439" y="1120" width="80" height="80" as="geometry"/>
+                <mxCell id="30" value="sort Planets" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1321" y="800" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="35" value="" style="edgeStyle=none;html=1;" parent="1" source="32" target="34" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="32" value="dispatch searchPlanets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#a0522d;fontColor=#ffffff;strokeColor=#6D1F00;" parent="1" vertex="1">
-                    <mxGeometry x="1279" y="1280" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="1200" y="1200" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="37" value="" style="edgeStyle=none;html=1;" parent="1" source="34" target="36" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="34" value="search Planets" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-                    <mxGeometry x="1439" y="1280" width="80" height="80" as="geometry"/>
-                </mxCell>
-                <mxCell id="ubfBsB5RF--DKELB2w0U-71" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="36" target="ubfBsB5RF--DKELB2w0U-70">
+                <mxCell id="65" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="34" target="64">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="36" value="update searchedPlanets with searched planets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
-                    <mxGeometry x="1599" y="1280" width="80" height="80" as="geometry"/>
+                <mxCell id="34" value="search planets" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1360" y="1200" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="38" value="update Filtered planets with sorted filtered planets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
-                    <mxGeometry x="1599" y="1120" width="80" height="80" as="geometry"/>
+                <mxCell id="36" value="update searchedPlanets with searched planets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
+                    <mxGeometry x="1520" y="1120" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="update planets with sorted Planets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
+                    <mxGeometry x="1520" y="800" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="57" value="" style="edgeStyle=none;html=1;" parent="1" source="50" target="26" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="50" value="Sort/Filter/Search layout" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
-                    <mxGeometry x="959" y="1120" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="880" y="880" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="56" value="" style="edgeStyle=none;html=1;" parent="1" source="52" target="50" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="52" value="Planet page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
-                    <mxGeometry x="799" y="1120" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="720" y="880" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="59" value="" style="edgeStyle=none;html=1;" parent="1" source="54" target="29" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="54" value="Sort/Filter/Search layout" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
-                    <mxGeometry x="959" y="1280" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="880" y="1200" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="58" value="" style="edgeStyle=none;html=1;" parent="1" source="55" target="54" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="55" value="Planet page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
-                    <mxGeometry x="799" y="1280" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="720" y="1200" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="ubfBsB5RF--DKELB2w0U-59" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="ubfBsB5RF--DKELB2w0U-60" target="ubfBsB5RF--DKELB2w0U-62">
+                <mxCell id="ubfBsB5RF--DKELB2w0U-59" value="" style="edgeStyle=none;html=1;" parent="1" source="ubfBsB5RF--DKELB2w0U-60" target="ubfBsB5RF--DKELB2w0U-62" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="ubfBsB5RF--DKELB2w0U-60" value="Multi filters" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="1119" y="1440" width="80" height="80" as="geometry"/>
+                <mxCell id="ubfBsB5RF--DKELB2w0U-60" value="Multi filters" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1040" y="1440" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="ubfBsB5RF--DKELB2w0U-61" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="ubfBsB5RF--DKELB2w0U-62" target="ubfBsB5RF--DKELB2w0U-64">
+                <mxCell id="ubfBsB5RF--DKELB2w0U-61" value="" style="edgeStyle=none;html=1;" parent="1" source="ubfBsB5RF--DKELB2w0U-62" target="ubfBsB5RF--DKELB2w0U-64" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="ubfBsB5RF--DKELB2w0U-62" value="dispatch filterPlanets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#a0522d;fontColor=#ffffff;strokeColor=#6D1F00;" vertex="1" parent="1">
-                    <mxGeometry x="1279" y="1440" width="80" height="80" as="geometry"/>
+                <mxCell id="ubfBsB5RF--DKELB2w0U-62" value="dispatch filterPlanets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#a0522d;fontColor=#ffffff;strokeColor=#6D1F00;" parent="1" vertex="1">
+                    <mxGeometry x="1200" y="1440" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="ubfBsB5RF--DKELB2w0U-63" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="ubfBsB5RF--DKELB2w0U-64" target="ubfBsB5RF--DKELB2w0U-65">
+                <mxCell id="ubfBsB5RF--DKELB2w0U-63" value="" style="edgeStyle=none;html=1;" parent="1" source="ubfBsB5RF--DKELB2w0U-64" target="ubfBsB5RF--DKELB2w0U-65" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="ubfBsB5RF--DKELB2w0U-64" value="filter searched Planets" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-                    <mxGeometry x="1439" y="1440" width="80" height="80" as="geometry"/>
+                <mxCell id="ubfBsB5RF--DKELB2w0U-64" value="filter searched Planets" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1360" y="1440" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="ubfBsB5RF--DKELB2w0U-65" value="update filteredPlanets with filtered planets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" vertex="1" parent="1">
-                    <mxGeometry x="1599" y="1440" width="80" height="80" as="geometry"/>
+                <mxCell id="ubfBsB5RF--DKELB2w0U-65" value="update filteredPlanets with filtered planets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
+                    <mxGeometry x="1520" y="1440" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="ubfBsB5RF--DKELB2w0U-66" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="ubfBsB5RF--DKELB2w0U-67" target="ubfBsB5RF--DKELB2w0U-60">
+                <mxCell id="ubfBsB5RF--DKELB2w0U-66" value="" style="edgeStyle=none;html=1;" parent="1" source="ubfBsB5RF--DKELB2w0U-67" target="ubfBsB5RF--DKELB2w0U-60" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="ubfBsB5RF--DKELB2w0U-67" value="Sort/Filter/Search layout" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
-                    <mxGeometry x="959" y="1440" width="80" height="80" as="geometry"/>
+                <mxCell id="ubfBsB5RF--DKELB2w0U-67" value="Sort/Filter/Search layout" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="1440" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="ubfBsB5RF--DKELB2w0U-68" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="ubfBsB5RF--DKELB2w0U-69" target="ubfBsB5RF--DKELB2w0U-67">
+                <mxCell id="ubfBsB5RF--DKELB2w0U-68" value="" style="edgeStyle=none;html=1;" parent="1" source="ubfBsB5RF--DKELB2w0U-69" target="ubfBsB5RF--DKELB2w0U-67" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="ubfBsB5RF--DKELB2w0U-69" value="Planet page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
-                    <mxGeometry x="799" y="1440" width="80" height="80" as="geometry"/>
+                <mxCell id="ubfBsB5RF--DKELB2w0U-69" value="Planet page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="1440" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="ubfBsB5RF--DKELB2w0U-70" value="reset filteredPlanets&amp;nbsp; with searched planets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" vertex="1" parent="1">
-                    <mxGeometry x="1759" y="1280" width="80" height="80" as="geometry"/>
+                <mxCell id="63" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="60" target="62">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="60" value="sort searchedPlanets" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="1321" y="960" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="62" value="update searchedPlanets and filteredPlanets with sorted searchedPlanets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" vertex="1" parent="1">
+                    <mxGeometry x="1520" y="960" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="64" value="update filteredPlanets with searched planets" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" vertex="1" parent="1">
+                    <mxGeometry x="1520" y="1280" width="80" height="80" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
