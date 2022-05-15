@@ -1,4 +1,4 @@
-import { render, cleanup, screen, fireEvent } from "@testing-library/react";
+import { render, cleanup, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Planets from ".";
 import data from "../../data/planets.json";
@@ -45,7 +45,7 @@ describe("Planets display and Pagination", () => {
     const previousButton = paginationButtons[0];
     const nextButton = paginationButtons[paginationButtons.length - 1];
 
-    fireEvent.click(nextButton);
+    userEvent.click(nextButton);
 
     const eleventhItemElement = screen.getByText(eleventhItemName);
     const twentiethItemElement = screen.getByText(twentiethItemName);
@@ -53,7 +53,7 @@ describe("Planets display and Pagination", () => {
     expect(eleventhItemElement).toBeInTheDocument();
     expect(twentiethItemElement).toBeInTheDocument();
 
-    fireEvent.click(previousButton);
+    userEvent.click(previousButton);
 
     const firstItemName = data.results[0].name;
     const tenthItemName = data.results[9].name;
@@ -71,7 +71,7 @@ describe("Planets display and Pagination", () => {
     const sixthPaginationItem = screen
       .getByTestId("pagination-control-wrapper")
       .getElementsByTagName("li")[5];
-    fireEvent.click(sixthPaginationItem);
+    userEvent.click(sixthPaginationItem);
 
     const fiftyfirstItemElement = screen.getByText(fiftyFirstItem);
     const sixtiethItemElement = screen.getByText(sixtiethItem);

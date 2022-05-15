@@ -1,4 +1,5 @@
-import { render, cleanup, screen, fireEvent } from "@testing-library/react";
+import { render, cleanup, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Button from ".";
 
 const FAKE_TEXT = '>'
@@ -17,7 +18,7 @@ describe("Button", () => {
   it("should call onClick callback if button is clicked", () => {
     const button = screen.getByRole('button')
 
-    fireEvent.click(button)
+    userEvent.click(button)
     
     expect(mockOnClick).toHaveBeenCalled();
   });

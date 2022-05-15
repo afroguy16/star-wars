@@ -1,4 +1,5 @@
-import { render, cleanup, screen, fireEvent } from "@testing-library/react";
+import { render, cleanup, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import PaginationControls from ".";
 import { results } from "../../mocks/transformed-planets-response";
 
@@ -25,7 +26,7 @@ describe("PaginationControls with perPage and totalCount greater than zero", () 
     const fakeIndex = 1; //random number chosen, but must be greater than 0 and less than the length of the array
     const selectedListItem = screen.getAllByRole("listitem")[fakeIndex];
 
-    fireEvent.click(selectedListItem);
+    userEvent.click(selectedListItem);
 
     expect(mockOnSelectPage).toHaveBeenCalledWith(fakeIndex + 1);
     expect(selectedListItem).toHaveClass("active");
@@ -38,13 +39,13 @@ describe("PaginationControls with perPage and totalCount greater than zero", () 
     const firstPageIndex = 0;
     const secondPageIndex = 1;
 
-    fireEvent.click(nextButton);
+    userEvent.click(nextButton);
     expect(mockOnSelectPage).toHaveBeenCalledWith(2);
 
     let activeListItem = screen.getAllByRole("listitem")[secondPageIndex];
     expect(activeListItem).toHaveClass("active");
 
-    fireEvent.click(previousButton);
+    userEvent.click(previousButton);
     expect(mockOnSelectPage).toHaveBeenCalledWith(1);
 
     activeListItem = screen.getAllByRole("listitem")[firstPageIndex];
@@ -58,11 +59,11 @@ describe("PaginationControls with perPage and totalCount greater than zero", () 
 
     expect(previousButton).toHaveAttribute("disabled");
 
-    fireEvent.click(nextButton);
-    fireEvent.click(nextButton);
-    fireEvent.click(nextButton);
-    fireEvent.click(nextButton);
-    fireEvent.click(nextButton);
+    userEvent.click(nextButton);
+    userEvent.click(nextButton);
+    userEvent.click(nextButton);
+    userEvent.click(nextButton);
+    userEvent.click(nextButton);
     expect(nextButton).toHaveAttribute("disabled");
   });
 });

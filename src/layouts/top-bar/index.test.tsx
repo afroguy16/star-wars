@@ -1,4 +1,5 @@
-import { render, cleanup, screen, fireEvent } from "@testing-library/react";
+import { render, cleanup, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import TopBar from ".";
 
 describe("TopBar", () => {
@@ -15,7 +16,7 @@ describe("TopBar", () => {
   it("should call onToggleSwitch callback if toggle clicked", () => {
     const checkbox = screen.getByRole('checkbox')
 
-    fireEvent.click(checkbox)
+    userEvent.click(checkbox)
     
     expect(mockOnToggleSwitch).toHaveBeenCalled();
   });
