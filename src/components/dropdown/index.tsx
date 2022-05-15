@@ -1,5 +1,5 @@
 import { HTMLAttributes, ReactNode, useState } from "react";
-import ButtonText from "../button-text";
+import Button from "../button";
 import { StyledDropdownWrapper } from "./styles";
 
 type Props = {
@@ -17,7 +17,7 @@ const Dropdown = ({
   return (
     <StyledDropdownWrapper {...props}>
       <div className="outter">
-        <ButtonText
+        <Button
           text={label}
           variant="outline"
           onClick={() => setExpanded((previousState) => !previousState)}

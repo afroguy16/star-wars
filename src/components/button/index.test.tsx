@@ -1,9 +1,9 @@
 import { render, cleanup, screen, fireEvent } from "@testing-library/react";
-import ButtonText from ".";
+import Button from ".";
 
 const FAKE_TEXT = '>'
 
-describe("ButtonText", () => {
+describe("Button", () => {
   let baseElement: HTMLElement;
   let mockOnClick: jest.Mock<any, any>;
 
@@ -12,7 +12,7 @@ describe("ButtonText", () => {
   beforeEach(() => {
     mockOnClick = jest.fn()
 
-    const utils = render(<ButtonText text={FAKE_TEXT} onClick={mockOnClick} />);
+    const utils = render(<Button text={FAKE_TEXT} onClick={mockOnClick} />);
     baseElement = utils.baseElement;
   });
 

@@ -1,5 +1,5 @@
 import { HTMLAttributes, useState } from "react";
-import ButtonText from "../button-text";
+import Button from "../button";
 import Dropdown from "../dropdown";
 import { StyledSelectWrapper } from "./styles";
 
@@ -42,7 +42,7 @@ const Select = ({
         aria-selected={isSelected(index)}
         onClick={() => onChangeHandler(index)}
       >
-        <ButtonText text={option} />
+        <Button text={option} />
       </li>
     ));
 
@@ -82,7 +82,7 @@ const Select = ({
               aria-selected={defaultOptionIsSelected()}
               onClick={resetSelectedOption}
             >
-              <ButtonText text={defaultOption} />
+              <Button text={defaultOption} />
             </li>
           )}
           {getOptionsElements()}

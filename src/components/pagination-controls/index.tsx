@@ -1,5 +1,5 @@
 import { HTMLAttributes, useEffect, useState } from "react";
-import ButtonText from "../button-text";
+import Button from "../button";
 import { StyledPaginationControlsWrapper } from "./styles";
 
 const DEFAULT_ACTIVE_PAGE = 1;
@@ -53,7 +53,7 @@ const PaginationControls = ({
           className={isActivePage(pageNumber) ? "active" : ""}
           onClick={() => handleOnSelectPages(pageNumber)}
         >
-          <ButtonText text={pageNumber.toString()} />
+          <Button text={pageNumber.toString()} />
         </li>
       );
     });
@@ -71,7 +71,7 @@ const PaginationControls = ({
       {isValidProps && (
         <StyledPaginationControlsWrapper {...props}>
           {hasUpToTwoPage() && (
-            <ButtonText
+            <Button
               text="<"
               onClick={() => handleOnSelectPages(activePage - 1)}
               disabled={activePage < 2}
@@ -79,7 +79,7 @@ const PaginationControls = ({
           )}
           <ul className="pagination-list-item">{getPageCountListElement()}</ul>
           {hasUpToTwoPage() && (
-            <ButtonText
+            <Button
               text=">"
               onClick={() => handleOnSelectPages(activePage + 1)}
               disabled={activePage === roundedPageCount}

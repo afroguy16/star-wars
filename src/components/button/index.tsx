@@ -6,7 +6,7 @@ type Props = {
   variant?: string;
 };
 
-const ButtonText = ({
+const Button = ({
   text,
   variant,
   ...props
@@ -14,4 +14,4 @@ const ButtonText = ({
   return <StyledButton className={variant} {...props}>{text}</StyledButton>;
 };
 
-export default ButtonText;
+export default Button;
