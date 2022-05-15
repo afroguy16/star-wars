@@ -21,7 +21,7 @@ const OPTIONS: Set<SortPlanetsByE> = new Set([
 ]);
 
 const FilterSort = ({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivElement>) => {
-  const { searchedPlanets, sortFilteredPlanets, searchPlanets, filterPlanets } =
+  const { searchedPlanets, sortSearchedPlanets, searchPlanets, filterPlanets } =
     usePlanetsContext();
 
   const getTerrainOptions = useMemo(() => {
@@ -39,7 +39,7 @@ const FilterSort = ({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivEle
   }, [searchedPlanets]);
 
   const onSetActiveSort = (newSortValue: SortPlanetsByE) => {
-    sortFilteredPlanets(newSortValue);
+    sortSearchedPlanets(newSortValue);
     onTriggered();
   };
 
