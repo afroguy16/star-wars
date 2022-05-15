@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ButtonText from "../button-text";
 import Dropdown from "../dropdown";
 import { StyledSelectMultiWrapper } from "./styles";
 
@@ -17,14 +16,14 @@ type SelectedOptions = {
 const SelectMulti = ({ options, label, searchable, onValueChange }: Props) => {
   const [unfilteredSelectedOptions, setUnfilteredSelectedOptions] =
     useState<SelectedOptions>({});
-  const [filteredOptions, setFilteredOptions] = useState([...options]);
+  const [filterOption, setFilterOptions] = useState([...options]);
 
   useEffect(() => {
-    setFilteredOptions([...options]);
+    setFilterOptions([...options].sort());
   }, [options]);
 
   const isSelected = (index: number) =>
-    unfilteredSelectedOptions[index] === filteredOptions[index];
+    unfilteredSelectedOptions[index] === filterOption[index];
 
   const filteredSelectedOptions = (rawSelectedOptions: SelectedOptions) =>
     Object.values(rawSelectedOptions).filter((value) => value !== "");
@@ -32,10 +31,10 @@ const SelectMulti = ({ options, label, searchable, onValueChange }: Props) => {
   // This could be made a hook to avoid repeatition
   const onFilterOptions = (query: string) => {
     if (query === "") {
-      setFilteredOptions([...options]);
+      setFilterOptions([...options]);
     }
     const filtered = [...options].filter((option) => option.includes(query.toLowerCase()));
-    setFilteredOptions([...filtered]);
+    setFilterOptions([...filtered]);
   };
 
   const handleOnChange = (index: number) => {
@@ -45,7 +44,7 @@ const SelectMulti = ({ options, label, searchable, onValueChange }: Props) => {
       !updatedSelectedOptions.hasOwnProperty(index) ||
       updatedSelectedOptions[index] === ""
     ) {
-      updatedSelectedOptions[index] = filteredOptions[index];
+      updatedSelectedOptions[index] = filterOption[index];
     } else {
       updatedSelectedOptions[index] = "";
     }
@@ -67,7 +66,7 @@ const SelectMulti = ({ options, label, searchable, onValueChange }: Props) => {
   };
 
   const getInputElements = () =>
-    filteredOptions.map((option, index) => (
+    filterOption.map((option, index) => (
       <div key={index} className="option">
         <input
           checked={isSelected(index)}

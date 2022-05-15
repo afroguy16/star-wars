@@ -30,14 +30,14 @@ describe("SelectMulti", () => {
     
     expect(optionElements).toHaveLength(FAKE_OPTIONS.size)
     expect(firstOptionElement).toHaveAttribute('name', FAKE_OPTIONS_ARRAY[0])
-    expect(secondOptionElement).toHaveAttribute('name', FAKE_OPTIONS_ARRAY[1])
-    expect(thirdOptionElement).toHaveAttribute('name', FAKE_OPTIONS_ARRAY[2])
+    expect(secondOptionElement).toHaveAttribute('name', FAKE_OPTIONS_ARRAY[2]) //item is sorted by select-multi
+    expect(thirdOptionElement).toHaveAttribute('name', FAKE_OPTIONS_ARRAY[1])
   });
 
   it("should call onValueCange callback with the current a snapshot of the current state of the options selected", async () => {
     const optionElements = screen.getAllByRole('checkbox')
     const firstOptionElement = optionElements[0]
-    const secondOptionElement = optionElements[1]
+    const secondOptionElement = optionElements[2] //item is sorted by select-multi
     const firstOptionSelected = [FAKE_OPTIONS_ARRAY[0]]
     const firstAndSecondOptionsSelected = [...firstOptionSelected, FAKE_OPTIONS_ARRAY[1]]
 

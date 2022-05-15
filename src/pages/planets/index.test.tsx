@@ -160,15 +160,15 @@ describe("Planets Searching and Filtering", () => {
     userEvent.click(toggleButton)
 
     let terrainFilterOptions = screen.getAllByRole("checkbox")
-    let firstOptionElement = terrainFilterOptions[0]
     let thirdOptionElement = terrainFilterOptions[2]
-
-    userEvent.click(firstOptionElement)
-    let planetElements = screen.getAllByLabelText("planet")
-    expect(planetElements).toHaveLength(4)
+    let fourthOptionElement = terrainFilterOptions[3]
 
     userEvent.click(thirdOptionElement)
+    let planetElements = screen.getAllByLabelText("planet")
+    expect(planetElements).toHaveLength(1)
+
+    userEvent.click(fourthOptionElement)
     planetElements = screen.getAllByLabelText("planet")
-    expect(planetElements).toHaveLength(2)
+    expect(planetElements).toHaveLength(1)
   });
 });
