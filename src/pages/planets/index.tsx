@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PaginationControls from "../../components/pagination-controls";
 import Planet from "../../components/planet";
 import { PlanetT } from "../../components/planet/types";
@@ -26,7 +26,7 @@ const Planets = () => {
     setCurrenPage(newCurrentPage);
   };
 
-  const getPlanetsElements = () => {
+  const getPlanetsElements = useMemo(() => {
     const paginatedPlanets = paginate(
       filteredPlanets,
       PER_PAGE,
@@ -38,7 +38,7 @@ const Planets = () => {
         <Planet meta={planet} />
       </li>
     ));
-  };
+  }, [filteredPlanets, currentPage, paginate]);
 
   const resetCurrentPage = () => {
     setCurrenPage(DEFAULT_CURRENT_PAGE);
@@ -57,7 +57,7 @@ const Planets = () => {
       />
       <div className="planet-list-wrapper">
         {filteredPlanets.length > 0 ? (
-          <ul className="planet-list">{getPlanetsElements()}</ul>
+          <ul className="planet-list">{getPlanetsElements}</ul>
         ) : (
           <p>No planets found here 😔</p>
         )}
