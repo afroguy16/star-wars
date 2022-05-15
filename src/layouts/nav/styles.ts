@@ -10,7 +10,7 @@ export const StyledNavWrapper = styled.div`
   background-color: ${(props) => props.theme.background};
   transition: 0.5s;
 
-  @media(min-width: ${breakPoints.medium}) {
+  @media(min-width: ${breakPoints.small}) {
     min-height: 70px;
   }
 `;

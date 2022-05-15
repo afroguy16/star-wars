@@ -8,6 +8,7 @@ export const StyledPlanetsWrapper = styled.div`
   
   .sort-filter-search {
     margin-bottom: 32px;
+    padding-top: 20px;
   }
 
   .planet-list {
@@ -26,7 +27,7 @@ export const StyledPlanetsWrapper = styled.div`
       width: 400px;
       margin-bottom: 20px;
 
-      @media (min-width: ${breakPoints.medium}) {
+      @media (min-width: ${breakPoints.small}) {
         width: 521px;
         &:nth-child(odd) {
           margin-right: 20px;
@@ -34,7 +35,7 @@ export const StyledPlanetsWrapper = styled.div`
       }
     }
 
-    @media (min-width: ${breakPoints.medium}) {
+    @media (min-width: ${breakPoints.small}) {
       padding: 0 15%;
       padding-top: 20px;
     }

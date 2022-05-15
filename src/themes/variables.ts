@@ -7,5 +7,6 @@ export const colors = {
 }
 
 export const breakPoints = {
-    medium: '768px'
+    small: '768px',
+    medium: '1400px'
 }

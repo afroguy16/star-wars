@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { breakPoints } from "../../themes/variables";
 
 export const StyledPlanetWrapper = styled.div`
-  box-shadow: ${(props) => props.theme.itemShadow} 0px 8px 24px;
   background-color: ${(props) => props.theme.background};
   border: 1px solid ${(props) => props.theme.borderColor};
   padding: 32px 48px;
@@ -51,7 +50,7 @@ export const StyledPlanetWrapper = styled.div`
     flex-wrap: wrap;
     text-transform: capitalize;
     margin-bottom: 48px;
-    @media (min-width: ${breakPoints.medium}) {
+    @media (min-width: ${breakPoints.small}) {
       margin-bottom: 96px;
     }
     > * {

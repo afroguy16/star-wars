@@ -12,7 +12,7 @@ export const StyledPaginationControlsWrapper = styled.div`
     &:not(:last-child) {
       margin-right: 7px;
 
-      @media (min-width: ${breakPoints.medium}) {
+      @media (min-width: ${breakPoints.small}) {
         margin-right: 20px;
       }
     }

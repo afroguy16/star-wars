@@ -1,15 +1,26 @@
 import styled from "styled-components";
+import { breakPoints } from "../../themes/variables";
 
 export const StyledFilterSortWrapper = styled.div`
-  padding-left: 10%;
-  padding-right: 10%;
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: 5fr 2fr 3fr;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: ${breakPoints.small}) {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 7fr 4fr;
+  }
+
+  @media (min-width: ${breakPoints.medium}) {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
 
   > {
-    &:nth-child(2) {
-      grid-column-start: 3;
+    &:not(:last-child) {
+      margin-bottom: 12px;
     }
   }
 
@@ -17,7 +28,7 @@ export const StyledFilterSortWrapper = styled.div`
     padding: 12px 20px;
     border-radius: 30px;
     outline: none;
-    border: 1px solid ${props => props.theme.borderColor};
+    border: 1px solid ${(props) => props.theme.borderColor};
     background: none;
     &::placeholder {
       font-size: 16px;
@@ -35,10 +46,21 @@ export const StyledFilterSortWrapper = styled.div`
 
   .sort-filter {
     display: flex;
-    justify-content: flex-end;
-    > {
-      &:not(:last-child) {
-        margin-right: 20px;
+    justify-content: space-between;
+    @media (min-width: ${breakPoints.small}) {
+      justify-content: flex-end;
+      > {
+        &:not(:last-child) {
+          margin-right: 10px;
+        }
+      }
+    }
+    @media (min-width: ${breakPoints.medium}) {
+      justify-content: flex-end;
+      > {
+        &:not(:last-child) {
+          margin-right: 20px;
+        }
       }
     }
   }
