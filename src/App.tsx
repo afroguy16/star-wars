@@ -3,7 +3,9 @@ import { ThemeProvider } from "styled-components";
 import Nav from "./layouts/nav";
 import themes from "./themes";
 import { ThemesE } from "./themes/enums";
-import Planets from "./views/planets";
+import Planets from "./pages/planets";
+import { PlanetsProvider } from "./store/PlanetsContext";
+import { StyledAppWrapper } from "./App.styles";
 
 const App = () => {
   const [activeTheme, setActiveTheme] = useState<ThemesE>(ThemesE.LIGHT);
@@ -15,8 +17,12 @@ const App = () => {
 
   return (
     <ThemeProvider theme={themes[activeTheme]}>
-      <Nav onToggleSwitch={onToggleTheme} />
-      <Planets />
+      <StyledAppWrapper>
+        <Nav onToggleSwitch={onToggleTheme} />
+        <PlanetsProvider>
+          <Planets />
+        </PlanetsProvider>
+      </StyledAppWrapper>
     </ThemeProvider>
   );
 };

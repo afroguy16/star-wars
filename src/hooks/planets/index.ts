@@ -1,23 +1,26 @@
-import planets from "../../data/planets.json";
-import { PlanetT } from "../../components/planet/types";
+import { useCallback } from "react"
+import planets from "../../data/planets.json"
+import { PlanetT } from "../../components/planet/types"
 
 type UsePlanets = {
-  fetchPlanets: () => Array<PlanetT>;
+  fetchPlanets: () => Array<PlanetT>
 };
 
 function usePlanets(): UsePlanets {
-  const fetchPlanets = () => {
-    return planets.results?.map((planet) => {
+  const fetchPlanets = useCallback((): Array<PlanetT> => {
+    const results = planets.results.map((planet) => {
       const { name, climate, terrain, population, residents } = planet;
       return {
         name,
-        climate: climate.split(","),
-        terrain: terrain.split(","),
-        population,
-        residents: residents?.length.toString()
+        climate: climate.split(",").map((item) => item.trim()),
+        terrain: terrain.split(",").map((item) => item.trim()),
+        population: +population >= 0 ? +population : -1,
+        residents: residents?.length,
       };
     });
-  };
+
+    return results
+  }, []);
 
   return { fetchPlanets };
 }

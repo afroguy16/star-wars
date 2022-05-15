@@ -5,8 +5,10 @@ const DarkTheme = {
     lightPrimary: '#D16E36',
     primary: '#D96321',
     text: colors.lightGray,
-    itemBackground: '#333333',
-    borderColor: colors.lightGray
+    textLight: colors.extraLightGray1,
+    itemBackground: colors.darkGray,
+    borderColor: colors.gray,
+    disabled: colors.darkGray,
 }
 
 export default DarkTheme

@@ -1,8 +1,12 @@
 export const colors = {
-    lightGray: '#F5F6F7',
-    gray: '#464545'
+    extraLightGray: '#F5F6F7',
+    extraLightGray1: '#DBDBDB',
+    lightGray: '#D3D3DE',
+    gray: '#464545',
+    darkGray: '#333333'
 }
 
 export const breakPoints = {
-    medium: '768px'
+    small: '768px',
+    medium: '1400px'
 }

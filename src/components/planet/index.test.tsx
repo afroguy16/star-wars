@@ -6,12 +6,17 @@ const FAKE_PLANET: PlanetT = {
   name: 'fake name',
   terrain: ['fakeT1', 'fakeT2', 'fakeT3'],
   climate: ['fakeC1', 'fakeC2'],
-  population: '23232',
-  residents: '938'
+  population: 23232,
+  residents: 938
+}
+
+const FAKE_PLANET_WITH_UKNOWN_POPULATION: PlanetT = {
+  ...FAKE_PLANET,
+  population: -1
 }
 
 
-describe("ButtonToggleSwitch", () => {
+describe("Planet", () => {
   let baseElement: HTMLElement
   afterEach(cleanup)
 
@@ -28,7 +33,7 @@ describe("ButtonToggleSwitch", () => {
   it("should render all meta data in the page", () => {
     const climateItems = screen.getAllByRole('list')[0].getElementsByTagName('li')
     const nameText = screen.getByText(FAKE_PLANET.name)
-    const populationText = screen.getByText(FAKE_PLANET.population)
+    const populationText = screen.getByText(FAKE_PLANET.population.toLocaleString())
     const residentsText = screen.getByText(FAKE_PLANET.residents)
     const terrainItems = screen.getAllByRole('list')[1].getElementsByTagName('li')
     
@@ -37,5 +42,26 @@ describe("ButtonToggleSwitch", () => {
     expect(populationText).toBeInTheDocument()
     expect(residentsText).toBeInTheDocument()
     expect(terrainItems.length).toBe(FAKE_PLANET.terrain.length)
+  });
+});
+
+describe("Planet with unknow population", () => {
+  let baseElement: HTMLElement
+  afterEach(cleanup)
+
+  beforeEach(() => {
+    const utils = render(<Planet meta={FAKE_PLANET_WITH_UKNOWN_POPULATION} />)
+
+    baseElement = utils.baseElement
+  });
+
+  it("should render successfully", () => {
+    expect(baseElement).toBeTruthy()
+  });
+
+  it("should render unknow if population is less than 0", () => {
+    const populationText = screen.getByText("unknown")
+
+    expect(populationText).toBeInTheDocument()
   });
 });
