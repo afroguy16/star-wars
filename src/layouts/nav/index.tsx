@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import ButtonToggleSwitch from "../../components/button-toggle-switch";
+import ToggleSwitch from "../../components/toggle-switch";
 import { StyledNavWrapper } from "./styles";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 const Nav = ({ onToggleSwitch, ...props }: Props & HTMLAttributes<HTMLDivElement>) => {
   return (
     <StyledNavWrapper {...props}>
-      <ButtonToggleSwitch onToggleSwitch={onToggleSwitch} />
+      <ToggleSwitch onToggleSwitch={onToggleSwitch} />
     </StyledNavWrapper>
   );
 };

@@ -1,7 +1,7 @@
 import { render, cleanup, screen, fireEvent } from "@testing-library/react";
-import ButtonToggleSwitch from ".";
+import ToggleSwitch from ".";
 
-describe("ButtonToggleSwitch", () => {
+describe("ToggleSwitch", () => {
   let baseElement: HTMLElement;
   let mockOnToggleSwitch: jest.Mock<any, any>;
 
@@ -10,7 +10,7 @@ describe("ButtonToggleSwitch", () => {
   beforeEach(() => {
     mockOnToggleSwitch = jest.fn()
 
-    const utils = render(<ButtonToggleSwitch onToggleSwitch={mockOnToggleSwitch} />);
+    const utils = render(<ToggleSwitch onToggleSwitch={mockOnToggleSwitch} />);
     baseElement = utils.baseElement;
   });
 

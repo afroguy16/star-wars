@@ -4,10 +4,10 @@ type Props = {
   onToggleSwitch: () => void;
 };
 
-const ButtonToggleSwitch = ({ onToggleSwitch }: Props) => {
+const ToggleSwitch = ({ onToggleSwitch }: Props) => {
   return (
       <StyledInput type="checkbox" onClick={onToggleSwitch} />
   );
 };
 
-export default ButtonToggleSwitch;
+export default ToggleSwitch;
