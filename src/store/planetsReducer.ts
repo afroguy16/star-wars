@@ -32,7 +32,7 @@ export const usePlanetsReducer = (
       const searchedPlanets = search(
         SearchOrFilterPlanetsByE.NAME,
         [payload as string],
-        state.planets
+        [...state.planets]
       ) as Array<PlanetT>;
       return {
         ...state,
@@ -44,7 +44,7 @@ export const usePlanetsReducer = (
       const filteredPlanets = search(
         SearchOrFilterPlanetsByE.TERRAIN,
         payload as Array<string>,
-        state.searchedPlanets
+        [...state.searchedPlanets]
       ) as Array<PlanetT>;
       return {
         ...state,
@@ -52,23 +52,30 @@ export const usePlanetsReducer = (
       };
 
     case PlanetsActionsE.SORT_FILTERED_PLANETS:
-      let sortedPlanets: Array<PlanetT>;
+      let sortedPlanets: Array<PlanetT>
+      let sortedSearchedPlanets: Array<PlanetT>;
       switch (payload) {
         case SortPlanetsByE.NAME:
-          sortedPlanets = sortPlanetsByName(state.filteredPlanets);
+          sortedPlanets = sortPlanetsByName([...state.planets]);
+          sortedSearchedPlanets = sortPlanetsByName([...state.searchedPlanets]);
           break;
         case SortPlanetsByE.POPULATION:
-          sortedPlanets = sortPlanetsByPopulation(state.filteredPlanets);
+          sortedPlanets = sortPlanetsByPopulation([...state.planets]);
+          sortedSearchedPlanets = sortPlanetsByPopulation([...state.searchedPlanets]);
           break;
         case SortPlanetsByE.RESIDENTS:
-          sortedPlanets = sortPlanetsByResidents(state.filteredPlanets);
+          sortedPlanets = sortPlanetsByResidents([...state.planets]);
+          sortedSearchedPlanets = sortPlanetsByResidents([...state.searchedPlanets]);
           break;
         default:
-          sortedPlanets = [...(payload as Array<PlanetT>)];
+          sortedPlanets = [...state.planets];
+          sortedSearchedPlanets = [...state.planets];
       }
       return {
         ...state,
-        filteredPlanets: [...sortedPlanets],
+        planets: [...sortedPlanets],
+        searchedPlanets: [...sortedSearchedPlanets],
+        filteredPlanets: [...sortedSearchedPlanets]
       };
 
     default:
