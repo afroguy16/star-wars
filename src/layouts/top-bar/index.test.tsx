@@ -1,7 +1,7 @@
 import { render, cleanup, screen, fireEvent } from "@testing-library/react";
-import Nav from ".";
+import TopBar from ".";
 
-describe("Nav", () => {
+describe("TopBar", () => {
   let baseElement: HTMLElement;
   let mockOnToggleSwitch: jest.Mock<any, any>;
 
@@ -10,7 +10,7 @@ describe("Nav", () => {
   beforeEach(() => {
     mockOnToggleSwitch = jest.fn()
 
-    const utils = render(<Nav onToggleSwitch={mockOnToggleSwitch} />);
+    const utils = render(<TopBar onToggleSwitch={mockOnToggleSwitch} />);
     baseElement = utils.baseElement;
   });
 

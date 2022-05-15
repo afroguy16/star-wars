@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { breakPoints } from "../../themes/variables";
 
-export const StyledNavWrapper = styled.div`
+export const StyledTopBarWrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
   align-items: center;

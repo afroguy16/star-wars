@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
-import Nav from "./layouts/nav";
+import TopBar from "./layouts/top-bar";
 import themes from "./themes";
 import { ThemesE } from "./themes/enums";
 import Planets from "./pages/planets";
@@ -18,7 +18,7 @@ const App = () => {
   return (
     <ThemeProvider theme={themes[activeTheme]}>
       <StyledAppWrapper>
-        <Nav onToggleSwitch={onToggleTheme} />
+        <TopBar onToggleSwitch={onToggleTheme} />
         <PlanetsProvider>
           <Planets />
         </PlanetsProvider>
