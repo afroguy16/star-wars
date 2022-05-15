@@ -34,7 +34,7 @@ const SelectMulti = ({ options, label, searchable, onValueChange }: Props) => {
     if (query === "") {
       setFilteredOptions([...options]);
     }
-    const filtered = [...options].filter((option) => option.includes(query));
+    const filtered = [...options].filter((option) => option.includes(query.toLowerCase()));
     setFilteredOptions([...filtered]);
   };
 
