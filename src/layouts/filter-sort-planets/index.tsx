@@ -1,5 +1,4 @@
-import { HTMLAttributes } from "react";
-import { PlanetT } from "../../components/planet/types";
+import { HTMLAttributes, useMemo } from "react";
 import Select from "../../components/select";
 import SelectMulti from "../../components/select-multi";
 import { SortPlanetsByE } from "../../store/enums";
@@ -25,19 +24,19 @@ const FilterSort = ({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivEle
   const { searchedPlanets, sortFilteredPlanets, searchPlanets, filterPlanets } =
     usePlanetsContext();
 
-  const getTerrainOptions = (planets: Array<PlanetT>) => {
+  const getTerrainOptions = useMemo(() => {
     const terrainOptions: Array<Array<string>> = [];
 
-    planets.forEach(
-      (planet) =>
-        planet.terrain !== ["unknown"] &&
-        planet.terrain !== [""] &&
-        planet.terrain.length > 0 &&
-        terrainOptions.push(planet.terrain)
+    searchedPlanets.forEach(
+      (searchedPlanet) =>
+        searchedPlanet.terrain !== ["unknown"] &&
+        searchedPlanet.terrain !== [""] &&
+        searchedPlanet.terrain.length > 0 &&
+        terrainOptions.push(searchedPlanet.terrain)
     );
     
     return new Set(terrainOptions.flat());
-  };
+  }, [searchedPlanets]);
 
   const onSetActiveSort = (newSortValue: SortPlanetsByE) => {
     sortFilteredPlanets(newSortValue);
@@ -61,7 +60,7 @@ const FilterSort = ({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivEle
       </div>
       <div className="sort-filter">
         <SelectMulti
-          options={getTerrainOptions(searchedPlanets)}
+          options={getTerrainOptions}
           searchable
           onValueChange={onFilterPlanets}
           label="Filter by"

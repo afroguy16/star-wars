@@ -19,6 +19,7 @@ const SelectMulti = ({ options, label, searchable, onValueChange }: Props) => {
   const [filterOption, setFilterOptions] = useState([...options]);
 
   useEffect(() => {
+    setUnfilteredSelectedOptions({})
     setFilterOptions([...options].sort());
   }, [options]);
 
