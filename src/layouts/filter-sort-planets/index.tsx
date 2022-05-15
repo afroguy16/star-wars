@@ -1,3 +1,4 @@
+import { HTMLAttributes } from "react";
 import { PlanetT } from "../../components/planet/types";
 import Select from "../../components/select";
 import SelectMulti from "../../components/select-multi";
@@ -20,7 +21,7 @@ const OPTIONS: Set<SortPlanetsByE> = new Set([
   SortPlanetsByE.RESIDENTS,
 ]);
 
-const FilterSort = ({ onTriggered }: Props) => {
+const FilterSort = ({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivElement>) => {
   const { searchedPlanets, sortFilteredPlanets, searchPlanets, filterPlanets } =
     usePlanetsContext();
 
@@ -54,18 +55,24 @@ const FilterSort = ({ onTriggered }: Props) => {
   }
 
   return (
-    <StyledFilterSortWrapper>
-      <input type="text" onChange={(e) => onSearchByName(e.target.value)} />
-      <SelectMulti
-        options={getTerrainOptions(searchedPlanets)}
-        searchable
-        onValueChange={onFilterPlanets}
-      />
-      <Select
-        data-testid="sort"
-        options={OPTIONS}
-        onChange={(e) => onSetActiveSort(e as SortPlanetsByE)}
-      />
+    <StyledFilterSortWrapper {...props}>
+      <div className="search">
+        <input type="text" onChange={(e) => onSearchByName(e.target.value)} placeholder="Search planet names" />
+      </div>
+      <div className="sort-filter">
+        <SelectMulti
+          options={getTerrainOptions(searchedPlanets)}
+          searchable
+          onValueChange={onFilterPlanets}
+          label="Filter by"
+        />
+        <Select
+          data-testid="sort"
+          options={OPTIONS}
+          onChange={(e) => onSetActiveSort(e as SortPlanetsByE)}
+          label="Sort by"
+        />
+      </div>
     </StyledFilterSortWrapper>
   );
 };

@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { breakPoints } from "../../themes/variables";
 
 export const StyledPlanetWrapper = styled.div`
-  background-color: ${(props) => props.theme.itemBackground};
+  box-shadow: ${(props) => props.theme.itemShadow} 0px 8px 24px;
+  background-color: ${(props) => props.theme.background};
+  border: 1px solid ${(props) => props.theme.borderColor};
   padding: 32px 48px;
   padding-bottom: 0;
   border-radius: 12px;
@@ -13,7 +15,8 @@ export const StyledPlanetWrapper = styled.div`
     margin: 0; //p reset should be done globally
   }
 
-  .climate, .terrain {
+  .climate,
+  .terrain {
     display: flex;
     flex-direction: row;
     margin-bottom: 64px;
@@ -80,7 +83,7 @@ export const StyledPlanetWrapper = styled.div`
   .decoration {
     height: 8px;
     width: 100%;
-    background-color: ${props => props.theme.primary};
+    background-color: ${(props) => props.theme.primary};
     position: absolute;
     left: 0;
     bottom: 0;

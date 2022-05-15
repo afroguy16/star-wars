@@ -1,11 +1,14 @@
-import { SelectHTMLAttributes, useState } from "react";
+import { HTMLAttributes, useState } from "react";
+import ButtonText from "../button-text";
+import Dropdown from "../dropdown";
 import { StyledSelectWrapper } from "./styles";
 
 type Props = {
   defaultOption?: string;
-  label?: string;
+  label: string;
   options: Set<string>;
   searchable?: boolean;
+  searchableLabel?: string;
   onChange: (selectionOption: string) => void;
 };
 
@@ -14,48 +17,77 @@ const Select = ({
   label,
   options,
   searchable,
+  searchableLabel,
   onChange,
   ...props
-}: Props & SelectHTMLAttributes<HTMLSelectElement>) => {
+}: Props & HTMLAttributes<HTMLDivElement>) => {
   const [filteredOptions, setFilteredOptions] = useState([...options]);
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState(-1);
 
   // This could be made a hook to avoid repeatition
   const onFilterOptions = (query: string) => {
-    if(query === '') {
-      setFilteredOptions([...options])
+    if (query === "") {
+      setFilteredOptions([...options]);
     }
     const filtered = [...options].filter((option) => option.includes(query));
     setFilteredOptions([...filtered]);
   };
-  
+
   const getOptionsElements = () =>
     filteredOptions.map((option, index) => (
-      <option key={index} value={option}>
-        {option}
-      </option>
+      <li
+        key={index}
+        role="option"
+        className={isSelected(index) ? 'active' : ''}
+        aria-selected={isSelected(index)}
+        onClick={() => onChangeHandler(index)}
+      >
+        <ButtonText text={option} />
+      </li>
     ));
 
-  const onChangeHandler = (value: string) => {
+  const isSelected = (index: number) => index === selectedOptionIndex;
+
+  const defaultOptionIsSelected = () => selectedOptionIndex === -1;
+
+  const onChangeHandler = (index: number) => {
+    const value = filteredOptions[index];
+
+    setSelectedOptionIndex(index);
     onChange(value);
   };
 
+  const resetSelectedOption = () => {
+    setSelectedOptionIndex(-1);
+    onChange("");
+  };
+
   return (
-    <StyledSelectWrapper>
-      {!!label && <div><p>{label}</p></div>}
+    <StyledSelectWrapper {...props}>
+      <Dropdown label={label}>
+        {searchable && (
+          <div className="search">
+            <input
+              type="text"
+              onChange={(e) => onFilterOptions(e.target.value)}
+              placeholder={searchableLabel ? searchableLabel : 'Search items'}
+            />
+          </div>
+        )}
 
-      {searchable && (
-        <div>
-          <input
-            type="text"
-            onChange={(e) => onFilterOptions(e.target.value)}
-          />
-        </div>
-      )}
-
-      <select {...props} onChange={(e) => onChangeHandler(e.target.value)}>
-        {defaultOption && <option value="">{defaultOption}</option>}
-        {getOptionsElements()}
-      </select>
+        <ul className="options">
+          {defaultOption && (
+            <li
+              role="option"
+              aria-selected={defaultOptionIsSelected()}
+              onClick={resetSelectedOption}
+            >
+              <ButtonText text={defaultOption} />
+            </li>
+          )}
+          {getOptionsElements()}
+        </ul>
+      </Dropdown>
     </StyledSelectWrapper>
   );
 };

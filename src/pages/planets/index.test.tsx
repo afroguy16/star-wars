@@ -40,7 +40,8 @@ describe("Planets display and Pagination", () => {
   it("should renturn a list which contains the eleventh and twentieth when the next button is clicked after page renders and it should should the first and tenth payload name when previous button is clicked again", () => {
     const eleventhItemName = data.results[10].name;
     const twentiethItemName = data.results[19].name;
-    const paginationButtons = screen.getAllByRole("button");
+    const paginationControl = screen.getByTestId("pagination-control")
+    const paginationButtons = paginationControl.querySelectorAll("button");
     const previousButton = paginationButtons[0];
     const nextButton = paginationButtons[paginationButtons.length - 1];
 
@@ -81,6 +82,8 @@ describe("Planets display and Pagination", () => {
 });
 
 describe("Planets Sorting", () => {
+  let sortOptionsElement: HTMLCollectionOf<HTMLLIElement>
+
   afterEach(cleanup);
 
   beforeEach(() => {
@@ -91,9 +94,18 @@ describe("Planets Sorting", () => {
     );
   });
 
-  it("should return a list sorted by name if it is sorted by name", () => {
+  beforeEach(()=> {
     const sortElement = screen.getByTestId("sort");
-    fireEvent.change(sortElement, { target: { value: "name" } });
+    const toggleButton = sortElement.getElementsByTagName('button')[0]
+
+    userEvent.click(toggleButton)
+
+    sortOptionsElement = sortElement.getElementsByTagName('li')
+  })
+
+  it("should return a list sorted by name if it is sorted by name", () => {
+    const firstOptionElement = sortOptionsElement[0]
+    userEvent.click(firstOptionElement)
 
     const planetElements = screen.getAllByLabelText("planet");
     const firstPlanetElement = planetElements[0];
@@ -102,8 +114,8 @@ describe("Planets Sorting", () => {
   });
 
   it("should return a list sorted by population if it is sorted by population", () => {
-    const sortElement = screen.getByTestId("sort");
-    fireEvent.change(sortElement, { target: { value: "population" } });
+    const secondOptionElement = sortOptionsElement[1]
+    userEvent.click(secondOptionElement)
 
     const planetElements = screen.getAllByLabelText("planet");
     const firstPlanetElement = planetElements[0];
@@ -113,8 +125,8 @@ describe("Planets Sorting", () => {
   });
 
   it("should return a list sorted by residents if it is sorted by residents", () => {
-    const sortElement = screen.getByTestId("sort");
-    fireEvent.change(sortElement, { target: { value: "residents" } });
+    const thirdOptionElement = sortOptionsElement[2]
+    userEvent.click(thirdOptionElement);
 
     const planetElements = screen.getAllByLabelText("planet");
     const firstPlanetElement = planetElements[0];
@@ -144,6 +156,9 @@ describe("Planets Searching and Filtering", () => {
   });
 
   it("should return a list available planets that matches selected terrain", () => {
+    const toggleButton = screen.getByTestId('sort-filter-search').querySelector('button')!
+    userEvent.click(toggleButton)
+
     let terrainFilterOptions = screen.getAllByRole("checkbox")
     let firstOptionElement = terrainFilterOptions[0]
     let thirdOptionElement = terrainFilterOptions[2]

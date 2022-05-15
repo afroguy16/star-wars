@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { HTMLAttributes, useEffect, useState } from "react";
 import ButtonText from "../button-text";
 import { StyledPaginationControlsWrapper } from "./styles";
 
@@ -16,7 +16,8 @@ const PaginationControls = ({
   perPage,
   totalCount,
   onSelectPage,
-}: Props) => {
+  ...props
+}: Props & HTMLAttributes<HTMLDivElement>) => {
   const [isValidProps, setIsValidProps] = useState(false);
   const [roundedPageCount, setRoundedPageCount] = useState(Math.ceil(totalCount/perPage));
   const [activePage, setActivePage] = useState(
@@ -68,7 +69,7 @@ const PaginationControls = ({
   return (
     <>
       {isValidProps && (
-        <StyledPaginationControlsWrapper>
+        <StyledPaginationControlsWrapper {...props}>
           {hasUpToTwoPage() && (
             <ButtonText
               text="<"

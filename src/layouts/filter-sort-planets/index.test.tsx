@@ -1,4 +1,5 @@
-import { render, cleanup, screen, fireEvent } from "@testing-library/react";
+import { render, cleanup, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import FilterSort from ".";
 import { PlanetsProvider } from "../../store/PlanetsContext";
 
@@ -19,8 +20,14 @@ describe("FilterSort", () => {
 
   it("should call onTriggered callback if toggle Sort value changes", () => {
     const sortElement = screen.getByTestId("sort");
-    fireEvent.change(sortElement, { target: { value: "residents" } });
+    const toggleButton = sortElement.getElementsByTagName('button')[0]
 
+    userEvent.click(toggleButton)
+
+    const sortOptionsElement = sortElement.getElementsByTagName('li')
+    const firstOptionElement = sortOptionsElement[0]
+    
+    userEvent.click(firstOptionElement);
     expect(mockOnTriggeredCallBack).toHaveBeenCalled();
   });
 });

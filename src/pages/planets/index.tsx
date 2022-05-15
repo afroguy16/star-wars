@@ -46,7 +46,7 @@ const Planets = () => {
 
   return (
     <StyledPlanetsWrapper>
-      <FilterSort onTriggered={onFilterSortTriggered} />
+      <FilterSort className="sort-filter-search" onTriggered={onFilterSortTriggered} data-testid="sort-filter-search" />
       <ul className="planet-list">{getPlanetsElements()}</ul>
       <div data-testid="pagination-control-wrapper">
         <PaginationControls
@@ -54,6 +54,7 @@ const Planets = () => {
           perPage={PER_PAGE}
           totalCount={filteredPlanets.length}
           onSelectPage={onSetCurrentPage}
+          data-testid="pagination-control"
         />
       </div>
     </StyledPlanetsWrapper>

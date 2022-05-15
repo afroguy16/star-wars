@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import ButtonText from "../button-text";
+import Dropdown from "../dropdown";
 import { StyledSelectMultiWrapper } from "./styles";
 
 type Props = {
   options: Set<string>;
-  label?: string;
+  label: string;
   searchable?: boolean;
   onValueChange: (updatedState: Array<string>) => void;
 };
@@ -66,7 +68,7 @@ const SelectMulti = ({ options, label, searchable, onValueChange }: Props) => {
 
   const getInputElements = () =>
     filteredOptions.map((option, index) => (
-      <div key={index}>
+      <div key={index} className="option">
         <input
           checked={isSelected(index)}
           key={index}
@@ -81,21 +83,19 @@ const SelectMulti = ({ options, label, searchable, onValueChange }: Props) => {
 
   return (
     <StyledSelectMultiWrapper>
-      {!!label && (
-        <div>
-          <p>{label}</p>
-        </div>
-      )}
-      {searchable && (
-        <div>
-          <input
-            type="text"
-            onChange={(e) => onFilterOptions(e.target.value)}
-          />
-        </div>
-      )}
-      <div>{getSelectedOptionsCountElement()}</div>
-      <div>{getInputElements()}</div>
+      <Dropdown label={label} className="options">
+        {searchable && (
+          <div className="search">
+            <input
+              type="text"
+              placeholder="Search filters name"
+              onChange={(e) => onFilterOptions(e.target.value)}
+            />
+          </div>
+        )}
+        <div>{getSelectedOptionsCountElement()}</div>
+        <div className="checkboxes">{getInputElements()}</div>
+      </Dropdown>
     </StyledSelectMultiWrapper>
   );
 };

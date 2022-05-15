@@ -6,7 +6,7 @@ const FAKE_OPTIONS = new Set(['option 1', 'random', 'option 3'])
 const FAKE_OPTIONS_ARRAY = [...FAKE_OPTIONS]
 const FAKE_LABEL = "Select an option"
 
-describe("SelectMulti with no label", () => {
+describe("SelectMulti", () => {
   let mockOnValueChange: jest.Mock<any, any>;
 
   afterEach(cleanup);
@@ -14,8 +14,13 @@ describe("SelectMulti with no label", () => {
   beforeEach(() => {
     mockOnValueChange = jest.fn()
 
-    render(<SelectMulti onValueChange={(e) => mockOnValueChange(e)} options={FAKE_OPTIONS} />)
+    render(<SelectMulti onValueChange={(e) => mockOnValueChange(e)} options={FAKE_OPTIONS} label={FAKE_LABEL} />)
   });
+
+  beforeEach(()=> {
+    const toggleButton = screen.getByRole('button')
+    userEvent.click(toggleButton)
+  })
 
   it("should render a list of checkboxes based on options passed as props", () => {
     const optionElements = screen.getAllByRole('checkbox')
@@ -29,7 +34,7 @@ describe("SelectMulti with no label", () => {
     expect(thirdOptionElement).toHaveAttribute('name', FAKE_OPTIONS_ARRAY[2])
   });
 
-  it("should call onValueCange callback with the current a snapshot of the current state of the options selected", () => {
+  it("should call onValueCange callback with the current a snapshot of the current state of the options selected", async () => {
     const optionElements = screen.getAllByRole('checkbox')
     const firstOptionElement = optionElements[0]
     const secondOptionElement = optionElements[1]
@@ -68,18 +73,13 @@ describe("SelectMulti with no label", () => {
     expect(selectedCountElement.innerHTML).toBe(twoItemsSelected)
   });
 
-  it("should not show a label", () => {
-    const labelElement = screen.queryByText(FAKE_LABEL);
-    expect(labelElement).not.toBeInTheDocument();
-  });
-
   it("should not show a search box", () => {
     const searchbox = screen.queryByRole("textbox");
     expect(searchbox).toBeFalsy();
   });
 });
 
-describe("Searchable SelectMulti with Label", () => {
+describe("Searchable SelectMulti", () => {
   let mockOnValueChange: jest.Mock<any, any>;
 
   afterEach(cleanup);
@@ -88,6 +88,11 @@ describe("Searchable SelectMulti with Label", () => {
     mockOnValueChange = jest.fn()
 
     render(<SelectMulti onValueChange={(e) => mockOnValueChange(e)} options={FAKE_OPTIONS} label={FAKE_LABEL} searchable />)
+  })
+
+  beforeEach(()=> {
+    const toggleButton = screen.getByRole('button')
+    userEvent.click(toggleButton)
   })
 
   it("should show a label", () => {

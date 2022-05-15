@@ -5,6 +5,11 @@ export const StyledPlanetsWrapper = styled.div`
   background-color: ${(props) => props.theme.background};
   padding-bottom: 64px;
   transition: 0.5s;
+  
+  .sort-filter-search {
+    margin-bottom: 32px;
+  }
+
   .planet-list {
     display: flex;
     flex-direction: row;

@@ -5,8 +5,9 @@ const DarkTheme = {
     lightPrimary: '#D16E36',
     primary: '#D96321',
     text: colors.lightGray,
+    textLight: colors.extraLightGray1,
     itemBackground: colors.darkGray,
-    borderColor: colors.lightGray,
+    borderColor: colors.gray,
     disabled: colors.darkGray,
 }
 

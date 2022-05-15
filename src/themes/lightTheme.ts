@@ -5,9 +5,10 @@ const LightTheme = {
     lightPrimary: '#D16E36',
     primary: '#D96321',
     text: colors.gray,
+    textLight: colors.gray,
     itemBackground: '#FFFFFF',
-    borderColor: colors.gray,
-    disabled: '#D3D3D3',
+    borderColor: colors.lightGray,
+    disabled: '#D3D3D3'
 }
 
 export default LightTheme
