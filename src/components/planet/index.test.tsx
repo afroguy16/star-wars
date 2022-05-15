@@ -17,17 +17,10 @@ const FAKE_PLANET_WITH_UKNOWN_POPULATION: PlanetT = {
 
 
 describe("Planet", () => {
-  let baseElement: HTMLElement
   afterEach(cleanup)
 
   beforeEach(() => {
-    const utils = render(<Planet meta={FAKE_PLANET} />)
-
-    baseElement = utils.baseElement
-  });
-
-  it("should render successfully", () => {
-    expect(baseElement).toBeTruthy()
+    render(<Planet meta={FAKE_PLANET} />)
   });
 
   it("should render all meta data in the page", () => {
@@ -46,17 +39,10 @@ describe("Planet", () => {
 });
 
 describe("Planet with unknow population", () => {
-  let baseElement: HTMLElement
   afterEach(cleanup)
 
   beforeEach(() => {
-    const utils = render(<Planet meta={FAKE_PLANET_WITH_UKNOWN_POPULATION} />)
-
-    baseElement = utils.baseElement
-  });
-
-  it("should render successfully", () => {
-    expect(baseElement).toBeTruthy()
+    render(<Planet meta={FAKE_PLANET_WITH_UKNOWN_POPULATION} />)
   });
 
   it("should render unknow if population is less than 0", () => {

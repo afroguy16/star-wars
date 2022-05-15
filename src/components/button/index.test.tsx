@@ -4,7 +4,6 @@ import Button from ".";
 const FAKE_TEXT = '>'
 
 describe("Button", () => {
-  let baseElement: HTMLElement;
   let mockOnClick: jest.Mock<any, any>;
 
   afterEach(cleanup);
@@ -12,12 +11,7 @@ describe("Button", () => {
   beforeEach(() => {
     mockOnClick = jest.fn()
 
-    const utils = render(<Button text={FAKE_TEXT} onClick={mockOnClick} />);
-    baseElement = utils.baseElement;
-  });
-
-  it("should render successfully", () => {
-    expect(baseElement).toBeTruthy();
+    render(<Button text={FAKE_TEXT} onClick={mockOnClick} />);
   });
 
   it("should call onClick callback if button is clicked", () => {

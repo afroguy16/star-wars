@@ -5,7 +5,6 @@ import { results } from "../../mocks/transformed-planets-response";
 const FAKE_PER_PAGE = 2; //could be any number, but must be greater than zero and less than the length of the array used
 
 describe("PaginationControls with perPage and totalCount greater than zero", () => {
-  let baseElement: HTMLElement;
   let mockOnSelectPage: jest.Mock<any, any>;
 
   afterEach(cleanup);
@@ -13,18 +12,13 @@ describe("PaginationControls with perPage and totalCount greater than zero", () 
   beforeEach(() => {
     mockOnSelectPage = jest.fn();
 
-    const utils = render(
+    render(
       <PaginationControls
         perPage={FAKE_PER_PAGE}
         totalCount={results.length}
         onSelectPage={(e) => mockOnSelectPage(e)}
       />
     );
-    baseElement = utils.baseElement;
-  });
-
-  it("should render successfully", () => {
-    expect(baseElement).toBeTruthy();
   });
 
   it("should activate selected listitem and call onSelectpage with page number when a page item is clicked", () => {
@@ -74,7 +68,6 @@ describe("PaginationControls with perPage and totalCount greater than zero", () 
 });
 
 describe("PaginationControls with perPage and totalCount greater less than zero", () => {
-  let baseElement: HTMLElement;
   let mockOnSelectPage: jest.Mock<any, any>;
 
   afterEach(cleanup);
@@ -84,14 +77,13 @@ describe("PaginationControls with perPage and totalCount greater less than zero"
   });
 
   it("should return no list item if perPage is zero", () => {
-    const utils = render(
+    render(
       <PaginationControls
         perPage={0}
         totalCount={results.length}
         onSelectPage={(e) => mockOnSelectPage(e)}
       />
     );
-    baseElement = utils.baseElement;
 
     const listItems = screen.queryAllByRole("listitem");
 
@@ -99,14 +91,13 @@ describe("PaginationControls with perPage and totalCount greater less than zero"
   });
 
   it("should return no list item if totalCount is zero", () => {
-    const utils = render(
+    render(
       <PaginationControls
         perPage={10}
         totalCount={0}
         onSelectPage={(e) => mockOnSelectPage(e)}
       />
     );
-    baseElement = utils.baseElement;
 
     const listItems = screen.queryAllByRole("listitem");
 

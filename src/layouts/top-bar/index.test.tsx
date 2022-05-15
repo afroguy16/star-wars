@@ -2,7 +2,6 @@ import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 import TopBar from ".";
 
 describe("TopBar", () => {
-  let baseElement: HTMLElement;
   let mockOnToggleSwitch: jest.Mock<any, any>;
 
   afterEach(cleanup);
@@ -11,11 +10,6 @@ describe("TopBar", () => {
     mockOnToggleSwitch = jest.fn()
 
     const utils = render(<TopBar onToggleSwitch={mockOnToggleSwitch} />);
-    baseElement = utils.baseElement;
-  });
-
-  it("should render successfully", () => {
-    expect(baseElement).toBeTruthy();
   });
 
   it("should call onToggleSwitch callback if toggle clicked", () => {
