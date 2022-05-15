@@ -11,12 +11,19 @@ export const StyledPlanetsWrapper = styled.div`
     padding-top: 20px;
   }
 
+  .planet-list-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: calc(100vh - 250px);
+  }
+
   .planet-list {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    min-height: calc(100vh - 70px);
     color: ${(props) => props.theme.text};
     padding: 0;
     margin: 0;

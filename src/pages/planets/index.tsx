@@ -12,9 +12,9 @@ const PER_PAGE = 10;
 const DEFAULT_CURRENT_PAGE = 1;
 
 const Planets = () => {
-  const {fetchPlanets} = usePlanets();
-  const {paginate} = usePaginate();
-  const {savePlanets, filteredPlanets} = usePlanetsContext();
+  const { fetchPlanets } = usePlanets();
+  const { paginate } = usePaginate();
+  const { savePlanets, filteredPlanets } = usePlanetsContext();
   const [currentPage, setCurrenPage] = useState(DEFAULT_CURRENT_PAGE);
 
   useEffect(() => {
@@ -27,7 +27,11 @@ const Planets = () => {
   };
 
   const getPlanetsElements = () => {
-    const paginatedPlanets = paginate(filteredPlanets, PER_PAGE, currentPage) as Array<PlanetT>
+    const paginatedPlanets = paginate(
+      filteredPlanets,
+      PER_PAGE,
+      currentPage
+    ) as Array<PlanetT>;
 
     return paginatedPlanets.map((planet, index) => (
       <li key={index}>
@@ -37,17 +41,27 @@ const Planets = () => {
   };
 
   const resetCurrentPage = () => {
-    setCurrenPage(DEFAULT_CURRENT_PAGE)
-  }
+    setCurrenPage(DEFAULT_CURRENT_PAGE);
+  };
 
   const onFilterSortTriggered = () => {
-    resetCurrentPage()
-  }
+    resetCurrentPage();
+  };
 
   return (
     <StyledPlanetsWrapper>
-      <FilterSort className="sort-filter-search" onTriggered={onFilterSortTriggered} data-testid="sort-filter-search" />
-      <ul className="planet-list">{getPlanetsElements()}</ul>
+      <FilterSort
+        className="sort-filter-search"
+        onTriggered={onFilterSortTriggered}
+        data-testid="sort-filter-search"
+      />
+      <div className="planet-list-wrapper">
+        {filteredPlanets.length > 0 ? (
+          <ul className="planet-list">{getPlanetsElements()}</ul>
+        ) : (
+          <p>No planets found here 😔</p>
+        )}
+      </div>
       <div data-testid="pagination-control-wrapper">
         <PaginationControls
           parentControlledActivePage={currentPage}
