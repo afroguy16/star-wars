@@ -1,4 +1,4 @@
-import { HTMLAttributes, memo, useEffect, useState } from "react";
+import { HTMLAttributes, memo, useState } from "react";
 import Button from "../button";
 import Dropdown from "../dropdown";
 import { StyledSelectWrapper } from "./styles";
