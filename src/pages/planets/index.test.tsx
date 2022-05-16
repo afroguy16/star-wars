@@ -155,6 +155,19 @@ describe("Planets Searching and Filtering", () => {
     expect(planetElements).toHaveLength(5)
   });
 
+  it("should return no list of planets if query doesn't match any planet", () => {
+    const errorMessage = 'No planets found here 😔' //this is dependant on the hardcoded message in the planet's page and will break if the text changes
+    const searchBox = screen.getAllByRole("textbox")[0]
+
+    userEvent.type(searchBox, 'dddd')
+
+    const planetElements = screen.queryByLabelText("planet")
+    const errorMessageElement = screen.getByText(errorMessage)
+
+    expect(planetElements).toBeFalsy()
+    expect(errorMessageElement).toBeInTheDocument()
+  });
+
   it("should return a list available planets that matches selected terrain", () => {
     const toggleButton = screen.getByTestId('sort-filter-search').querySelector('button')!
     userEvent.click(toggleButton)

@@ -16,6 +16,7 @@ const Planets = () => {
   const { paginate } = usePaginate();
   const { savePlanets, filteredPlanets } = usePlanetsContext();
   const [currentPage, setCurrenPage] = useState(DEFAULT_CURRENT_PAGE);
+  const [filterSortUsed, setFilterSortUsed] = useState(false)
 
   useEffect(() => {
     const planets = fetchPlanets();
@@ -45,6 +46,7 @@ const Planets = () => {
   };
 
   const onFilterSortTriggered = useCallback(() => {
+    !filterSortUsed && setFilterSortUsed(true);
     resetCurrentPage();
   }, []);
 
@@ -56,10 +58,10 @@ const Planets = () => {
         data-testid="sort-filter-search"
       />
       <div className="planet-list-wrapper">
-        {filteredPlanets.length > 0 ? (
-          <ul className="planet-list">{getPlanetsElements}</ul>
-        ) : (
+        {filteredPlanets.length <= 0 && filterSortUsed ? (
           <p>No planets found here 😔</p>
+        ) : (
+          <ul className="planet-list">{getPlanetsElements}</ul>
         )}
       </div>
       <div data-testid="pagination-control-wrapper">
