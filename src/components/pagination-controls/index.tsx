@@ -1,4 +1,4 @@
-import { HTMLAttributes, useEffect, useState } from "react";
+import { HTMLAttributes, memo, useEffect, useState } from "react";
 import Button from "../button";
 import { StyledPaginationControlsWrapper } from "./styles";
 
@@ -11,7 +11,7 @@ type Props = {
   onSelectPage: (pageNumber: number) => void;
 };
 
-const PaginationControls = ({
+const PaginationControls = memo(({
   parentControlledActivePage,
   perPage,
   totalCount,
@@ -89,6 +89,6 @@ const PaginationControls = ({
       )}
     </>
   );
-};
+});
 
 export default PaginationControls;

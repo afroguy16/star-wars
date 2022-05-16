@@ -22,9 +22,9 @@ const Planets = () => {
     savePlanets(planets);
   }, [fetchPlanets, savePlanets]);
 
-  const onSetCurrentPage = (newCurrentPage: number) => {
+  const onSetCurrentPage = useCallback((newCurrentPage: number) => {
     setCurrenPage(newCurrentPage);
-  };
+  }, [setCurrenPage]);
 
   const getPlanetsElements = useMemo(() => {
     const paginatedPlanets = paginate(
