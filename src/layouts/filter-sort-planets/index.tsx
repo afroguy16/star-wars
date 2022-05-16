@@ -1,4 +1,4 @@
-import { HTMLAttributes, useCallback, useMemo } from "react";
+import { HTMLAttributes, memo, useCallback, useMemo } from "react";
 import Select from "../../components/select";
 import SelectMulti from "../../components/select-multi";
 import { SortPlanetsByE } from "../../store/enums";
@@ -20,7 +20,7 @@ const OPTIONS: Set<SortPlanetsByE> = new Set([
   SortPlanetsByE.RESIDENTS,
 ]);
 
-const FilterSort = ({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivElement>) => {
+const FilterSort = memo(({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivElement>) => {
   const { searchedPlanets, sortSearchedPlanets, searchPlanets, filterPlanets } =
     usePlanetsContext();
 
@@ -51,7 +51,7 @@ const FilterSort = ({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivEle
   const onFilterPlanets = useCallback((selectedTerrain: Array<string>) => {
     filterPlanets(selectedTerrain)
     onTriggered();
-  }, [])
+  }, [filterPlanets, onTriggered])
 
   return (
     <StyledFilterSortWrapper {...props}>
@@ -74,6 +74,6 @@ const FilterSort = ({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivEle
       </div>
     </StyledFilterSortWrapper>
   );
-};
+});
 
 export default FilterSort;
