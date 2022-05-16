@@ -59,7 +59,7 @@ const Planets = () => {
       />
       <div className="planet-list-wrapper">
         {filteredPlanets.length <= 0 && filterSortUsed ? (
-          <p>No planets found here 😔</p>
+          <p className="no-result">No planets found here 😔</p>
         ) : (
           <ul className="planet-list">{getPlanetsElements}</ul>
         )}
