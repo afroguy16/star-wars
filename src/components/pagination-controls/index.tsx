@@ -1,4 +1,4 @@
-import { HTMLAttributes, memo, useEffect, useState } from "react";
+import { HTMLAttributes, memo, useEffect, useMemo, useState } from "react";
 import Button from "../button";
 import { StyledPaginationControlsWrapper } from "./styles";
 
@@ -26,6 +26,8 @@ const PaginationControls = memo(({
       : DEFAULT_ACTIVE_PAGE
   );
 
+  const getRoundedPageCount = useMemo(() => Math.ceil(totalCount/perPage), [totalCount, perPage])
+
   useEffect(() => {
     parentControlledActivePage && setActivePage(parentControlledActivePage);
   }, [parentControlledActivePage]);
@@ -36,15 +38,13 @@ const PaginationControls = memo(({
       return;
     }
     setIsValidProps(true);
-    setRoundedPageCount(getRoundedPageCount());
-  }, [totalCount, perPage]);
+    setRoundedPageCount(getRoundedPageCount);
+  }, [totalCount, perPage, getRoundedPageCount]);
 
   const isActivePage = (pageNumber: number) => pageNumber === activePage;
 
-  const getRoundedPageCount = () => Math.ceil(totalCount/perPage)
-
   const getPageCountListElement = () => {
-    const roundedPageCount = getRoundedPageCount()
+    const roundedPageCount = getRoundedPageCount
     return [...Array(roundedPageCount)].map((_, index) => {
       const pageNumber = index + 1;
       return (
