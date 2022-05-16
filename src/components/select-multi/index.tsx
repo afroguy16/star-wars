@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import Dropdown from "../dropdown";
 import { StyledSelectMultiWrapper } from "./styles";
 
@@ -13,7 +13,7 @@ type SelectedOptions = {
   [key: number]: string;
 };
 
-const SelectMulti = ({ options, label, searchable, onValueChange }: Props) => {
+const SelectMulti = memo(({ options, label, searchable, onValueChange }: Props) => {
   const [unfilteredSelectedOptions, setUnfilteredSelectedOptions] =
     useState<SelectedOptions>({});
   const [filterOption, setFilterOptions] = useState([...options]);
@@ -98,6 +98,6 @@ const SelectMulti = ({ options, label, searchable, onValueChange }: Props) => {
       </Dropdown>
     </StyledSelectMultiWrapper>
   );
-};
+});
 
 export default SelectMulti;

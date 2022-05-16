@@ -1,5 +1,5 @@
-import { HTMLAttributes, useEffect, useState } from "react";
-import ButtonText from "../button-text";
+import { HTMLAttributes, memo, useEffect, useMemo, useState } from "react";
+import Button from "../button";
 import { StyledPaginationControlsWrapper } from "./styles";
 
 const DEFAULT_ACTIVE_PAGE = 1;
@@ -11,7 +11,7 @@ type Props = {
   onSelectPage: (pageNumber: number) => void;
 };
 
-const PaginationControls = ({
+const PaginationControls = memo(({
   parentControlledActivePage,
   perPage,
   totalCount,
@@ -26,6 +26,8 @@ const PaginationControls = ({
       : DEFAULT_ACTIVE_PAGE
   );
 
+  const getRoundedPageCount = useMemo(() => Math.ceil(totalCount/perPage), [totalCount, perPage])
+
   useEffect(() => {
     parentControlledActivePage && setActivePage(parentControlledActivePage);
   }, [parentControlledActivePage]);
@@ -36,15 +38,13 @@ const PaginationControls = ({
       return;
     }
     setIsValidProps(true);
-    setRoundedPageCount(getRoundedPageCount());
-  }, [totalCount, perPage]);
+    setRoundedPageCount(getRoundedPageCount);
+  }, [totalCount, perPage, getRoundedPageCount]);
 
   const isActivePage = (pageNumber: number) => pageNumber === activePage;
 
-  const getRoundedPageCount = () => Math.ceil(totalCount/perPage)
-
   const getPageCountListElement = () => {
-    const roundedPageCount = getRoundedPageCount()
+    const roundedPageCount = getRoundedPageCount
     return [...Array(roundedPageCount)].map((_, index) => {
       const pageNumber = index + 1;
       return (
@@ -53,7 +53,7 @@ const PaginationControls = ({
           className={isActivePage(pageNumber) ? "active" : ""}
           onClick={() => handleOnSelectPages(pageNumber)}
         >
-          <ButtonText text={pageNumber.toString()} />
+          <Button text={pageNumber.toString()} />
         </li>
       );
     });
@@ -71,7 +71,7 @@ const PaginationControls = ({
       {isValidProps && (
         <StyledPaginationControlsWrapper {...props}>
           {hasUpToTwoPage() && (
-            <ButtonText
+            <Button
               text="<"
               onClick={() => handleOnSelectPages(activePage - 1)}
               disabled={activePage < 2}
@@ -79,7 +79,7 @@ const PaginationControls = ({
           )}
           <ul className="pagination-list-item">{getPageCountListElement()}</ul>
           {hasUpToTwoPage() && (
-            <ButtonText
+            <Button
               text=">"
               onClick={() => handleOnSelectPages(activePage + 1)}
               disabled={activePage === roundedPageCount}
@@ -89,6 +89,6 @@ const PaginationControls = ({
       )}
     </>
   );
-};
+});
 
 export default PaginationControls;

@@ -29,6 +29,7 @@ export const StyledFilterSortWrapper = styled.div`
     border-radius: 30px;
     outline: none;
     border: 1px solid ${(props) => props.theme.borderColor};
+    color: ${props => props.theme.text};
     background: none;
     &::placeholder {
       font-size: 16px;

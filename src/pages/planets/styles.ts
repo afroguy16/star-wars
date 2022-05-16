@@ -19,6 +19,10 @@ export const StyledPlanetsWrapper = styled.div`
     min-height: calc(100vh - 250px);
   }
 
+  .no-result {
+    color: ${props => props.theme.text};
+  }
+
   .planet-list {
     display: flex;
     flex-direction: row;

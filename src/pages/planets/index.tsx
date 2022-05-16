@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import PaginationControls from "../../components/pagination-controls";
 import Planet from "../../components/planet";
 import { PlanetT } from "../../components/planet/types";
@@ -16,17 +16,18 @@ const Planets = () => {
   const { paginate } = usePaginate();
   const { savePlanets, filteredPlanets } = usePlanetsContext();
   const [currentPage, setCurrenPage] = useState(DEFAULT_CURRENT_PAGE);
+  const [filterSortUsed, setFilterSortUsed] = useState(false)
 
   useEffect(() => {
     const planets = fetchPlanets();
     savePlanets(planets);
   }, [fetchPlanets, savePlanets]);
 
-  const onSetCurrentPage = (newCurrentPage: number) => {
+  const onSetCurrentPage = useCallback((newCurrentPage: number) => {
     setCurrenPage(newCurrentPage);
-  };
+  }, [setCurrenPage]);
 
-  const getPlanetsElements = () => {
+  const getPlanetsElements = useMemo(() => {
     const paginatedPlanets = paginate(
       filteredPlanets,
       PER_PAGE,
@@ -38,15 +39,16 @@ const Planets = () => {
         <Planet meta={planet} />
       </li>
     ));
-  };
+  }, [filteredPlanets, currentPage, paginate]);
 
   const resetCurrentPage = () => {
     setCurrenPage(DEFAULT_CURRENT_PAGE);
   };
 
-  const onFilterSortTriggered = () => {
+  const onFilterSortTriggered = useCallback(() => {
+    !filterSortUsed && setFilterSortUsed(true);
     resetCurrentPage();
-  };
+  }, []);
 
   return (
     <StyledPlanetsWrapper>
@@ -56,10 +58,10 @@ const Planets = () => {
         data-testid="sort-filter-search"
       />
       <div className="planet-list-wrapper">
-        {filteredPlanets.length > 0 ? (
-          <ul className="planet-list">{getPlanetsElements()}</ul>
+        {filteredPlanets.length <= 0 && filterSortUsed ? (
+          <p className="no-result">No planets found here 😔</p>
         ) : (
-          <p>No planets found here 😔</p>
+          <ul className="planet-list">{getPlanetsElements}</ul>
         )}
       </div>
       <div data-testid="pagination-control-wrapper">

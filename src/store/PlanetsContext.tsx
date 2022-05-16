@@ -30,9 +30,9 @@ export const PlanetsProvider = ({children}: {children: ReactNode}) => {
     })
   }, [])
 
-  const sortFilteredPlanets = useCallback((payload: SortPlanetsByE) => {
+  const sortSearchedPlanets = useCallback((payload: SortPlanetsByE) => {
     dispatch({
-      type: PlanetsActionsE.SORT_FILTERED_PLANETS,
+      type: PlanetsActionsE.SORT_SEARCHED_PLANETS,
       payload
     })
   }, [])
@@ -44,7 +44,7 @@ export const PlanetsProvider = ({children}: {children: ReactNode}) => {
     savePlanets,
     searchPlanets,
     filterPlanets,
-    sortFilteredPlanets,
+    sortSearchedPlanets,
   }
 
   return <PlanetsContext.Provider value={value}>{children}</PlanetsContext.Provider>

@@ -51,7 +51,7 @@ export const usePlanetsReducer = (
         filteredPlanets: [...filteredPlanets],
       };
 
-    case PlanetsActionsE.SORT_FILTERED_PLANETS:
+    case PlanetsActionsE.SORT_SEARCHED_PLANETS:
       let sortedPlanets: Array<PlanetT>
       let sortedSearchedPlanets: Array<PlanetT>;
       switch (payload) {

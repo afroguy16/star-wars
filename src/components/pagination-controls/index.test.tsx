@@ -1,11 +1,11 @@
-import { render, cleanup, screen, fireEvent } from "@testing-library/react";
+import { render, cleanup, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import PaginationControls from ".";
 import { results } from "../../mocks/transformed-planets-response";
 
 const FAKE_PER_PAGE = 2; //could be any number, but must be greater than zero and less than the length of the array used
 
 describe("PaginationControls with perPage and totalCount greater than zero", () => {
-  let baseElement: HTMLElement;
   let mockOnSelectPage: jest.Mock<any, any>;
 
   afterEach(cleanup);
@@ -13,25 +13,20 @@ describe("PaginationControls with perPage and totalCount greater than zero", () 
   beforeEach(() => {
     mockOnSelectPage = jest.fn();
 
-    const utils = render(
+    render(
       <PaginationControls
         perPage={FAKE_PER_PAGE}
         totalCount={results.length}
         onSelectPage={(e) => mockOnSelectPage(e)}
       />
     );
-    baseElement = utils.baseElement;
-  });
-
-  it("should render successfully", () => {
-    expect(baseElement).toBeTruthy();
   });
 
   it("should activate selected listitem and call onSelectpage with page number when a page item is clicked", () => {
     const fakeIndex = 1; //random number chosen, but must be greater than 0 and less than the length of the array
     const selectedListItem = screen.getAllByRole("listitem")[fakeIndex];
 
-    fireEvent.click(selectedListItem);
+    userEvent.click(selectedListItem);
 
     expect(mockOnSelectPage).toHaveBeenCalledWith(fakeIndex + 1);
     expect(selectedListItem).toHaveClass("active");
@@ -44,13 +39,13 @@ describe("PaginationControls with perPage and totalCount greater than zero", () 
     const firstPageIndex = 0;
     const secondPageIndex = 1;
 
-    fireEvent.click(nextButton);
+    userEvent.click(nextButton);
     expect(mockOnSelectPage).toHaveBeenCalledWith(2);
 
     let activeListItem = screen.getAllByRole("listitem")[secondPageIndex];
     expect(activeListItem).toHaveClass("active");
 
-    fireEvent.click(previousButton);
+    userEvent.click(previousButton);
     expect(mockOnSelectPage).toHaveBeenCalledWith(1);
 
     activeListItem = screen.getAllByRole("listitem")[firstPageIndex];
@@ -64,17 +59,16 @@ describe("PaginationControls with perPage and totalCount greater than zero", () 
 
     expect(previousButton).toHaveAttribute("disabled");
 
-    fireEvent.click(nextButton);
-    fireEvent.click(nextButton);
-    fireEvent.click(nextButton);
-    fireEvent.click(nextButton);
-    fireEvent.click(nextButton);
+    userEvent.click(nextButton);
+    userEvent.click(nextButton);
+    userEvent.click(nextButton);
+    userEvent.click(nextButton);
+    userEvent.click(nextButton);
     expect(nextButton).toHaveAttribute("disabled");
   });
 });
 
 describe("PaginationControls with perPage and totalCount greater less than zero", () => {
-  let baseElement: HTMLElement;
   let mockOnSelectPage: jest.Mock<any, any>;
 
   afterEach(cleanup);
@@ -84,14 +78,13 @@ describe("PaginationControls with perPage and totalCount greater less than zero"
   });
 
   it("should return no list item if perPage is zero", () => {
-    const utils = render(
+    render(
       <PaginationControls
         perPage={0}
         totalCount={results.length}
         onSelectPage={(e) => mockOnSelectPage(e)}
       />
     );
-    baseElement = utils.baseElement;
 
     const listItems = screen.queryAllByRole("listitem");
 
@@ -99,14 +92,13 @@ describe("PaginationControls with perPage and totalCount greater less than zero"
   });
 
   it("should return no list item if totalCount is zero", () => {
-    const utils = render(
+    render(
       <PaginationControls
         perPage={10}
         totalCount={0}
         onSelectPage={(e) => mockOnSelectPage(e)}
       />
     );
-    baseElement = utils.baseElement;
 
     const listItems = screen.queryAllByRole("listitem");
 

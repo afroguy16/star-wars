@@ -1,4 +1,4 @@
-import { HTMLAttributes, useMemo } from "react";
+import { HTMLAttributes, memo, useCallback, useMemo } from "react";
 import Select from "../../components/select";
 import SelectMulti from "../../components/select-multi";
 import { SortPlanetsByE } from "../../store/enums";
@@ -20,8 +20,8 @@ const OPTIONS: Set<SortPlanetsByE> = new Set([
   SortPlanetsByE.RESIDENTS,
 ]);
 
-const FilterSort = ({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivElement>) => {
-  const { searchedPlanets, sortFilteredPlanets, searchPlanets, filterPlanets } =
+const FilterSort = memo(({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivElement>) => {
+  const { searchedPlanets, sortSearchedPlanets, searchPlanets, filterPlanets } =
     usePlanetsContext();
 
   const getTerrainOptions = useMemo(() => {
@@ -38,20 +38,20 @@ const FilterSort = ({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivEle
     return new Set(terrainOptions.flat());
   }, [searchedPlanets]);
 
-  const onSetActiveSort = (newSortValue: SortPlanetsByE) => {
-    sortFilteredPlanets(newSortValue);
+  const onSetActiveSort = useCallback((newSortValue: SortPlanetsByE) => {
+    sortSearchedPlanets(newSortValue);
     onTriggered();
-  };
+  }, [sortSearchedPlanets, onTriggered]);
 
   const onSearchByName = (query: string) => {
     searchPlanets(query);
     onTriggered();
   };
 
-  const onFilterPlanets = (selectedTerrain: Array<string>) => {
+  const onFilterPlanets = useCallback((selectedTerrain: Array<string>) => {
     filterPlanets(selectedTerrain)
     onTriggered();
-  }
+  }, [filterPlanets, onTriggered])
 
   return (
     <StyledFilterSortWrapper {...props}>
@@ -68,12 +68,12 @@ const FilterSort = ({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivEle
         <Select
           data-testid="sort"
           options={OPTIONS}
-          onChange={(e) => onSetActiveSort(e as SortPlanetsByE)}
+          onChange={useCallback((e) => onSetActiveSort(e as SortPlanetsByE), [onSetActiveSort])}
           label="Sort by"
         />
       </div>
     </StyledFilterSortWrapper>
   );
-};
+});
 
 export default FilterSort;
