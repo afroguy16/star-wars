@@ -48,10 +48,10 @@ const FilterSort = ({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivEle
     onTriggered();
   };
 
-  const onFilterPlanets = (selectedTerrain: Array<string>) => {
+  const onFilterPlanets = useCallback((selectedTerrain: Array<string>) => {
     filterPlanets(selectedTerrain)
     onTriggered();
-  }
+  }, [])
 
   return (
     <StyledFilterSortWrapper {...props}>
