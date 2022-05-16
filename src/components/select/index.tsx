@@ -1,4 +1,4 @@
-import { HTMLAttributes, useState } from "react";
+import { HTMLAttributes, memo, useEffect, useState } from "react";
 import Button from "../button";
 import Dropdown from "../dropdown";
 import { StyledSelectWrapper } from "./styles";
@@ -12,7 +12,7 @@ type Props = {
   onChange: (selectionOption: string) => void;
 };
 
-const Select = ({
+const Select = memo(({
   defaultOption,
   label,
   options,
@@ -90,6 +90,6 @@ const Select = ({
       </Dropdown>
     </StyledSelectWrapper>
   );
-};
+});
 
 export default Select;

@@ -1,4 +1,4 @@
-import { HTMLAttributes, useMemo } from "react";
+import { HTMLAttributes, useCallback, useMemo } from "react";
 import Select from "../../components/select";
 import SelectMulti from "../../components/select-multi";
 import { SortPlanetsByE } from "../../store/enums";
@@ -38,10 +38,10 @@ const FilterSort = ({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivEle
     return new Set(terrainOptions.flat());
   }, [searchedPlanets]);
 
-  const onSetActiveSort = (newSortValue: SortPlanetsByE) => {
+  const onSetActiveSort = useCallback((newSortValue: SortPlanetsByE) => {
     sortSearchedPlanets(newSortValue);
     onTriggered();
-  };
+  }, [sortSearchedPlanets, onTriggered]);
 
   const onSearchByName = (query: string) => {
     searchPlanets(query);
@@ -68,7 +68,7 @@ const FilterSort = ({ onTriggered, ...props }: Props & HTMLAttributes<HTMLDivEle
         <Select
           data-testid="sort"
           options={OPTIONS}
-          onChange={(e) => onSetActiveSort(e as SortPlanetsByE)}
+          onChange={useCallback((e) => onSetActiveSort(e as SortPlanetsByE), [onSetActiveSort])}
           label="Sort by"
         />
       </div>

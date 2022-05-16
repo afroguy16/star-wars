@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import PaginationControls from "../../components/pagination-controls";
 import Planet from "../../components/planet";
 import { PlanetT } from "../../components/planet/types";
@@ -44,9 +44,9 @@ const Planets = () => {
     setCurrenPage(DEFAULT_CURRENT_PAGE);
   };
 
-  const onFilterSortTriggered = () => {
+  const onFilterSortTriggered = useCallback(() => {
     resetCurrentPage();
-  };
+  }, []);
 
   return (
     <StyledPlanetsWrapper>
